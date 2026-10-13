@@ -1,0 +1,78 @@
+# ==========================================================================
+# ZERO26. Coaching Club — configuration du serveur (Hostinger / LiteSpeed,
+# compatible Apache). Ce fichier doit être placé à la racine du site
+# (dossier public_html), à côté de index.html.
+# ==========================================================================
+
+AddDefaultCharset utf-8
+Options -Indexes
+ErrorDocument 404 /404.html
+
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+  AddType image/x-icon .ico
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Toujours en HTTPS, et toujours sans « www » (une seule adresse pour Google).
+  # La 1re condition limite la règle au vrai domaine : l'adresse d'aperçu Hostinger reste consultable.
+  RewriteCond %{HTTP_HOST} ^(www\.)?zero26coachingclub\.com$ [NC]
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^(.*)$ https://zero26coachingclub.com/$1 [R=301,L]
+
+  # Anciennes adresses du site WordPress -> nouvelles pages (redirections permanentes)
+  RewriteRule ^conditions-generales-de-vente/?$ /cgv.html [R=301,L]
+  RewriteRule ^reglement-interieur/?$ /reglement-interieur.html [R=301,L]
+  RewriteRule ^coaching-prive/?$ /#coaching-prive [R=301,NE,L]
+  RewriteRule ^small-group/?$ /#small-group [R=301,NE,L]
+  RewriteRule ^seance-dessai/?$ /#essai [R=301,NE,L]
+  # Ancienne boutique WooCommerce : accueil (en attendant la future page de la collection)
+  RewriteRule ^(shop|panier|commander|mon-compte)(/.*)?$ / [R=301,L]
+  RewriteRule ^(produit|categorie-produit)/ / [R=301,L]
+  RewriteRule ^(backyardultra|stages)/?$ /#evenements [R=301,NE,L]
+  RewriteRule ^(accueil|saison2|cours-1|apprentice-registration-page)/?$ / [R=301,L]
+  RewriteRule ^(feed|comments/feed)/?$ / [R=301,L]
+  RewriteRule ^([a-z_-]+-)?sitemap(_index)?\.xml$ /sitemap.xml [R=301,L]
+
+  # Fichiers de l'ancien WordPress : supprimés définitivement
+  RewriteRule ^(wp-admin|wp-includes|wp-content|wp-json|wp-login\.php|xmlrpc\.php) - [G,L]
+
+  # Fichiers du dépôt GitHub (publication automatique) : jamais servis aux visiteurs
+  RewriteRule (^|/)\.git(/|$) - [R=404,L]
+  RewriteRule \.md$ - [R=404,L]
+</IfModule>
+
+# Compression des fichiers texte
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript text/javascript application/json image/svg+xml image/x-icon
+</IfModule>
+
+# Mise en cache dans le navigateur des visiteurs
+# (après modification de style.css, main.js ou legal.js, changer le « ?v=… » dans les pages HTML)
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 hour"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType text/javascript "access plus 1 week"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/x-icon "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/xml "access plus 1 hour"
+  ExpiresByType text/plain "access plus 1 hour"
+</IfModule>
+
+# En-têtes de sécurité
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>

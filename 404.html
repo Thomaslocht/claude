@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Page introuvable — ZERO26. Coaching Club</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#08080a">
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/style.css?v=20261007">
+  <style>
+    .lost { position: relative; overflow: hidden; min-height: 100vh; min-height: 100svh; display: grid; place-items: center; padding: 48px var(--gutter); text-align: center; }
+    .lost__in { position: relative; max-width: 640px; }
+    .lost__code {
+      display: block;
+      font-family: var(--serif);
+      font-size: clamp(120px, 28vw, 260px);
+      line-height: .9;
+      background-image: var(--sheen);
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      -webkit-text-fill-color: transparent;
+      animation: sheen 7s linear infinite;
+    }
+    .lost__title { margin-top: 18px; }
+    .lost__txt { margin: 18px auto 0; max-width: 44ch; font-size: 17px; color: var(--fog); }
+    .lost__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 34px; }
+    .lost__logo { display: inline-block; margin-bottom: 40px; }
+    .lost__logo img { height: 34px; width: auto; }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <main class="lost">
+    <div class="legal-hero__glow" aria-hidden="true"></div>
+    <div class="lost__in">
+      <a class="lost__logo" href="/" aria-label="ZERO26. Coaching Club — accueil"><img src="/assets/img/logo-zero26.webp" alt="ZERO26." width="480" height="179"></a>
+      <span class="lost__code" aria-hidden="true">404</span>
+      <h1 class="h-md lost__title">Cette page a quitté <em>le club.</em></h1>
+      <p class="lost__txt">L’adresse a peut-être changé avec le nouveau site. Tout le reste est toujours là&nbsp;: offres, tarifs, séance d’essai.</p>
+      <div class="lost__cta">
+        <a class="btn btn--primary btn--lg" href="/">Retour à l’accueil</a>
+        <a class="btn btn--ghost btn--lg" href="/#contact" data-trial>Réserver un essai</a>
+      </div>
+    </div>
+  </main>
+  <script src="/assets/js/consent.js?v=20261007" defer></script>
+</body>
+</html>
