@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>SuperLeague Concept2 Triathlon — Inscription | ZERO26. Coaching Club</title>
-  <meta name="description" content="SuperLeague Concept2 Triathlon au club ZERO26. à Saint-Quentin : 3 manches enchaînées sur SKI, RUN et ROW, départs par vagues de 3, classement individuel hommes et femmes. Inscriptions ouvertes.">
+  <meta name="description" content="SuperLeague Concept2 Triathlon le 20 novembre 2026 au club ZERO26. à Saint-Quentin : 3 manches enchaînées sur SKI, RUN et ROW, départs par vagues de 3, classement individuel hommes et femmes. Inscriptions ouvertes.">
   <meta name="theme-color" content="#08080a">
   <link rel="canonical" href="https://zero26coachingclub.com/superleague.html">
   <meta property="og:type" content="website">
@@ -25,8 +25,30 @@
   <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css?v=20261030">
-  <link rel="stylesheet" href="assets/css/superleague.css?v=20261030b">
-  <script>document.documentElement.classList.add('js', 'hero-ready');</script>
+  <link rel="stylesheet" href="assets/css/superleague.css?v=20261031">
+  <script>
+    document.documentElement.classList.add('js', 'hero-ready');
+    try { if (localStorage.getItem('z26-theme') === 'day') document.documentElement.dataset.theme = 'day'; } catch (e) {}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SportsEvent",
+    "name": "SuperLeague Concept2 Triathlon",
+    "description": "Compétition individuelle en 3 manches enchaînées sur SKI, RUN et ROW, départs par vagues de 3, classements hommes et femmes.",
+    "url": "https://zero26coachingclub.com/superleague.html",
+    "image": ["https://zero26coachingclub.com/assets/img/og-superleague.jpg"],
+    "startDate": "2026-11-20",
+    "eventStatus": "https://schema.org/EventScheduled",
+    "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+    "location": {
+      "@type": "Place",
+      "name": "ZERO26. Coaching Club",
+      "address": { "@type": "PostalAddress", "streetAddress": "11 rue d’Isle", "postalCode": "02100", "addressLocality": "Saint-Quentin", "addressCountry": "FR" }
+    },
+    "organizer": { "@type": "Organization", "name": "ZERO26. Coaching Club", "url": "https://zero26coachingclub.com/" }
+  }
+  </script>
 </head>
 <body class="sl">
 
@@ -65,6 +87,10 @@
       <a href="index.html#contact" data-roll>Contact</a>
     </nav>
     <div class="nav__actions">
+      <button class="sl-theme" type="button" data-sl-theme aria-pressed="false" aria-label="Passer en mode jour">
+        <svg class="i sl-theme__sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"/></svg>
+        <svg class="i sl-theme__moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 14.6A7.5 7.5 0 0 1 9.4 4.5a7.5 7.5 0 1 0 10.1 10.1z"/></svg>
+      </button>
       <a class="btn btn--ghost nav__member" href="https://backoffice.bsport.io/c/1748/" target="_blank" rel="noopener"><span data-roll>Espace membre</span></a>
       <a class="btn btn--primary" href="#inscription"><span data-roll>Je m’inscris</span></a>
       <button class="nav__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span><span></span></button>
@@ -97,7 +123,7 @@
 
   <!-- ========== HERO ========== -->
   <section class="sl-hero" id="top" aria-labelledby="sl-title" data-sl-hero>
-    <div class="sl-hero__glow" aria-hidden="true"></div>
+    <div class="sl-hud" data-sl-hud aria-hidden="true"></div>
     <div class="container">
       <div class="sl-hero__top">
         <nav class="sl-stations" aria-label="Les trois appareils">
@@ -108,10 +134,9 @@
         <p class="sl-state" data-sl-state><span class="sl-state__dot" aria-hidden="true"></span><span data-sl-state-text>Inscriptions ouvertes</span></p>
       </div>
 
-      <h1 class="sl-hero__title" id="sl-title" aria-label="SuperLeague, triathlon">
-        <span class="sl-w sl-w--grad" data-sl-split aria-hidden="true">Super</span>
-        <span class="sl-hero__kicker" aria-hidden="true">Triathlon</span>
-        <span class="sl-w sl-w--league" data-sl-split aria-hidden="true">League</span>
+      <h1 class="sl-hero__title" id="sl-title">
+        <span class="sl-line sl-line--1"><span class="sl-line__i">Triathlon</span></span>
+        <span class="sl-line sl-line--2"><span class="sl-line__i"><em class="sl-super">Super</em> League</span></span>
       </h1>
 
       <div class="sl-hero__foot" data-sl-reveal>
@@ -121,24 +146,27 @@
           <a class="btn btn--ghost btn--lg" href="#epreuve"><span data-roll>Voir l’épreuve</span></a>
         </div>
         <dl class="sl-facts">
-          <div><dt>Date</dt><dd data-sl-date>À venir</dd></div>
+          <div><dt>Date</dt><dd data-sl-date>Vendredi 20 novembre 2026</dd></div>
           <div><dt>Lieu</dt><dd>Au club, 11 rue d’Isle, Saint-Quentin</dd></div>
           <div><dt>Format</dt><dd>Individuel · H / F</dd></div>
         </dl>
       </div>
 
       <div class="sl-reel" data-sl-reel>
-        <figure class="sl-reel__card" data-speed="-50">
+        <figure class="sl-reel__card" data-st="ski">
           <div class="sl-reel__media"><img src="assets/img/superleague-ski-540.webp" srcset="assets/img/superleague-ski-540.webp 540w, assets/img/superleague-ski-900.webp 900w" sizes="(max-width: 600px) 72vw, (max-width: 960px) 33vw, 400px" alt="Un athlète tire sur les poignées du SkiErg, au club" width="900" height="1600" style="--pos: 62% 48%" decoding="async"></div>
-          <figcaption><span class="sl-reel__tag" style="--st: var(--ski)">SKI</span>Tirer, encore.</figcaption>
+          <dl class="sl-reel__data" aria-label="Distances en SKI, manche par manche"><div style="--d:1.000"><dt>M1</dt><dd><i></i>750&nbsp;m</dd></div><div style="--d:0.333"><dt>M2</dt><dd><i></i>250&nbsp;m</dd></div><div style="--d:0.667"><dt>M3</dt><dd><i></i>500&nbsp;m</dd></div></dl>
+          <figcaption class="sl-reel__cap"><span class="sl-reel__tag">SKI</span><span>SkiErg</span></figcaption>
         </figure>
-        <figure class="sl-reel__card" data-speed="-140">
-          <div class="sl-reel__media"><img src="assets/img/superleague-club-540.webp" srcset="assets/img/superleague-club-540.webp 540w, assets/img/superleague-club-900.webp 900w" sizes="(max-width: 600px) 72vw, (max-width: 960px) 33vw, 400px" alt="Une séance de rameurs au club ZERO26., coachs et athlètes" width="900" height="1600" style="--pos: 40% 72%" decoding="async"></div>
-          <figcaption><span class="sl-reel__tag" style="--st: var(--run)">Club</span>3 appareils de chaque.</figcaption>
+        <figure class="sl-reel__card" data-st="run">
+          <div class="sl-reel__media"><img src="assets/img/superleague-club-540.webp" srcset="assets/img/superleague-club-540.webp 540w, assets/img/superleague-club-900.webp 900w" sizes="(max-width: 600px) 72vw, (max-width: 960px) 33vw, 400px" alt="Une séance au club ZERO26., coachs et athlètes sur les machines" width="900" height="1600" style="--pos: 40% 72%" decoding="async"></div>
+          <dl class="sl-reel__data" aria-label="Distances en RUN, manche par manche"><div style="--d:0.667"><dt>M1</dt><dd><i></i>500&nbsp;m</dd></div><div style="--d:1.000"><dt>M2</dt><dd><i></i>750&nbsp;m</dd></div><div style="--d:0.333"><dt>M3</dt><dd><i></i>250&nbsp;m</dd></div></dl>
+          <figcaption class="sl-reel__cap"><span class="sl-reel__tag">RUN</span><span>Course</span></figcaption>
         </figure>
-        <figure class="sl-reel__card" data-speed="-90">
+        <figure class="sl-reel__card" data-st="row">
           <div class="sl-reel__media"><img src="assets/img/superleague-rameuses-540.webp" srcset="assets/img/superleague-rameuses-540.webp 540w, assets/img/superleague-rameuses-900.webp 900w" sizes="(max-width: 600px) 72vw, (max-width: 960px) 33vw, 400px" alt="Deux athlètes côte à côte sur les rameurs" width="900" height="1600" style="--pos: 55% 58%" decoding="async"></div>
-          <figcaption><span class="sl-reel__tag" style="--st: var(--row)">ROW</span>Côte à côte, chacun son chrono.</figcaption>
+          <dl class="sl-reel__data" aria-label="Distances en ROW, manche par manche"><div style="--d:0.333"><dt>M1</dt><dd><i></i>250&nbsp;m</dd></div><div style="--d:0.667"><dt>M2</dt><dd><i></i>500&nbsp;m</dd></div><div style="--d:1.000"><dt>M3</dt><dd><i></i>750&nbsp;m</dd></div></dl>
+          <figcaption class="sl-reel__cap"><span class="sl-reel__tag">ROW</span><span>Rameur</span></figcaption>
         </figure>
       </div>
     </div>
@@ -157,7 +185,7 @@
     <div class="container">
       <div class="sl-head">
         <p class="sl-k" data-sl-reveal>01 — L’épreuve</p>
-        <h2 class="sl-display" id="epreuve-title" data-sl-reveal>3 manches.</h2>
+        <h2 class="sl-display" id="epreuve-title" data-sl-reveal>3 manches</h2>
         <p class="sl-head__sub" data-sl-reveal>Chaque manche est un circuit que vous enchaînez seul, sur les trois appareils. L’ordre et les distances changent à chaque fois&nbsp;: 1&nbsp;500&nbsp;m par manche, 4&nbsp;500&nbsp;m au total.</p>
       </div>
 
@@ -210,27 +238,49 @@
     <div class="container">
       <div class="sl-head">
         <p class="sl-k" data-sl-reveal>02 — Le déroulé</p>
-        <h2 class="sl-display" id="deroule-title" data-sl-reveal>Par vagues <span class="sl-grad">de&nbsp;3.</span></h2>
-        <p class="sl-head__sub" data-sl-reveal>Les vagues sont tirées au sort le jour&nbsp;J. Vous passez trois fois au départ&nbsp;: une fois par manche.</p>
+        <h2 class="sl-display" id="deroule-title" data-sl-reveal>Par vagues <span class="sl-grad">de&nbsp;3</span></h2>
+        <p class="sl-head__sub" data-sl-reveal>Trois athlètes partent ensemble, un par appareil. Une vague part toutes les 5&nbsp;minutes. Les vagues sont tirées au sort le jour&nbsp;J.</p>
       </div>
 
-      <ol class="sl-rules">
-        <li data-sl-reveal>
-          <p class="sl-num" aria-hidden="true">3</p>
-          <h3>athlètes par vague</h3>
-          <p>Le club compte trois appareils de chaque&nbsp;: trois athlètes s’élancent ensemble, chacun sur sa machine.</p>
-        </li>
-        <li data-sl-reveal style="--delay:.08s">
-          <p class="sl-num" aria-hidden="true">5<small>min</small></p>
-          <h3>entre deux départs</h3>
-          <p>Une nouvelle vague part toutes les 5&nbsp;minutes&nbsp;: assez d’écart pour que personne ne se gêne.</p>
-        </li>
-        <li data-sl-reveal style="--delay:.16s">
-          <p class="sl-num" aria-hidden="true">×3</p>
-          <h3>manches, l’une après l’autre</h3>
-          <p>Tout le monde termine la manche en cours avant que la suivante ne commence.</p>
-        </li>
-      </ol>
+      <ul class="sl-keys" data-sl-reveal>
+        <li><b>3</b><span>athlètes par vague, un sur chaque appareil</span></li>
+        <li><b>5&nbsp;min</b><span>entre deux départs</span></li>
+        <li><b>M1 → M3</b><span>la manche suivante commence quand tout le monde a fini</span></li>
+      </ul>
+
+      <figure class="sl-board" data-sl-board data-sl-reveal>
+        <figcaption class="sl-board__head">
+          <span class="sl-board__title">Exemple&nbsp;: la manche&nbsp;1 avec 4 vagues</span>
+          <span class="sl-board__clock" data-board-clock aria-hidden="true">0:00</span>
+          <ul class="sl-legend" aria-hidden="true">
+            <li data-st="ski">SKI 750&nbsp;m</li>
+            <li data-st="run">RUN 500&nbsp;m</li>
+            <li data-st="row">ROW 250&nbsp;m</li>
+          </ul>
+        </figcaption>
+        <p class="sr-only">Chaque vague enchaîne le SKI, le RUN puis le ROW. La vague 1 part à 0 minute, la vague 2 à 5 minutes, la vague 3 à 10 minutes et la vague 4 à 15 minutes&nbsp;: quand une vague arrive sur un appareil, la précédente l’a déjà quitté.</p>
+        <div class="sl-board__plot" aria-hidden="true" style="--span:22">
+            <div class="sl-board__row" data-wave="1">
+              <span class="sl-board__label">Vague 1<small>départ 0&nbsp;min</small></span>
+              <span class="sl-board__track"><span class="sl-seg" data-st="ski" style="--s:0;--l:3" data-tip="Vague 1 · SKI 750 m"><span>SKI</span></span><span class="sl-seg" data-st="run" style="--s:3;--l:2" data-tip="Vague 1 · RUN 500 m"><span>RUN</span></span><span class="sl-seg" data-st="row" style="--s:5;--l:1" data-tip="Vague 1 · ROW 250 m"><span>ROW</span></span></span>
+            </div>
+            <div class="sl-board__row" data-wave="2">
+              <span class="sl-board__label">Vague 2<small>départ 5&nbsp;min</small></span>
+              <span class="sl-board__track"><span class="sl-seg" data-st="ski" style="--s:5;--l:3" data-tip="Vague 2 · SKI 750 m"><span>SKI</span></span><span class="sl-seg" data-st="run" style="--s:8;--l:2" data-tip="Vague 2 · RUN 500 m"><span>RUN</span></span><span class="sl-seg" data-st="row" style="--s:10;--l:1" data-tip="Vague 2 · ROW 250 m"><span>ROW</span></span></span>
+            </div>
+            <div class="sl-board__row" data-wave="3">
+              <span class="sl-board__label">Vague 3<small>départ 10&nbsp;min</small></span>
+              <span class="sl-board__track"><span class="sl-seg" data-st="ski" style="--s:10;--l:3" data-tip="Vague 3 · SKI 750 m"><span>SKI</span></span><span class="sl-seg" data-st="run" style="--s:13;--l:2" data-tip="Vague 3 · RUN 500 m"><span>RUN</span></span><span class="sl-seg" data-st="row" style="--s:15;--l:1" data-tip="Vague 3 · ROW 250 m"><span>ROW</span></span></span>
+            </div>
+            <div class="sl-board__row" data-wave="4">
+              <span class="sl-board__label">Vague 4<small>départ 15&nbsp;min</small></span>
+              <span class="sl-board__track"><span class="sl-seg" data-st="ski" style="--s:15;--l:3" data-tip="Vague 4 · SKI 750 m"><span>SKI</span></span><span class="sl-seg" data-st="run" style="--s:18;--l:2" data-tip="Vague 4 · RUN 500 m"><span>RUN</span></span><span class="sl-seg" data-st="row" style="--s:20;--l:1" data-tip="Vague 4 · ROW 250 m"><span>ROW</span></span></span>
+            </div>
+            <div class="sl-board__axis"><span class="sl-board__label"></span><span class="sl-board__ticks"><span style="--s:0">0<i>&nbsp;min</i></span><span style="--s:5">5<i>&nbsp;min</i></span><span style="--s:10">10<i>&nbsp;min</i></span><span style="--s:15">15<i>&nbsp;min</i></span><span style="--s:20">20<i>&nbsp;min</i></span></span></div>
+            <span class="sl-board__head-line" data-board-playhead></span>
+        </div>
+        <p class="sl-board__note">Durées indicatives&nbsp;: chacun avance à son rythme. Quand une vague arrive sur un appareil, la précédente l’a déjà libéré.</p>
+      </figure>
     </div>
   </section>
 
@@ -239,8 +289,8 @@
     <div class="container">
       <div class="sl-head">
         <p class="sl-k" data-sl-reveal>03 — Le classement</p>
-        <h2 class="sl-display" id="classement-title" data-sl-reveal>Le plus bas gagne.</h2>
-        <p class="sl-head__sub" data-sl-reveal>Vos trois temps s’additionnent&nbsp;: le plus petit total l’emporte. Trois classements individuels, et pas de classement par équipe.</p>
+        <h2 class="sl-display" id="classement-title" data-sl-reveal>Le plus rapide <span class="sl-grad">l’emporte</span></h2>
+        <p class="sl-head__sub" data-sl-reveal>On additionne vos temps des trois manches&nbsp;: le plus petit total l’emporte. Classement individuel, hommes et femmes.</p>
       </div>
 
       <div class="sl-sum" data-sl-reveal>
@@ -255,9 +305,9 @@
       <p class="sl-sum__note" data-sl-reveal>Exemple de calcul, avec des temps fictifs.</p>
 
       <ul class="sl-boards" data-sl-reveal>
-        <li><span class="sl-boards__t">Général</span><span class="sl-boards__d">Tous les athlètes</span></li>
-        <li><span class="sl-boards__t">Hommes</span><span class="sl-boards__d">Classement masculin</span></li>
-        <li><span class="sl-boards__t">Femmes</span><span class="sl-boards__d">Classement féminin</span></li>
+        <li><span class="sl-boards__t">Hommes</span><span class="sl-boards__d">Classement individuel</span></li>
+        <li><span class="sl-boards__t">Femmes</span><span class="sl-boards__d">Classement individuel</span></li>
+        <li><span class="sl-boards__t">Général</span><span class="sl-boards__d">Toutes catégories confondues</span></li>
       </ul>
     </div>
   </section>
@@ -267,13 +317,13 @@
     <div class="container">
       <div class="sl-head">
         <p class="sl-k" data-sl-reveal>04 — Inscription</p>
-        <h2 class="sl-display" id="inscription-title" data-sl-reveal>Je m’<span class="sl-grad">inscris.</span></h2>
+        <h2 class="sl-display" id="inscription-title" data-sl-reveal>Je m’<span class="sl-grad">inscris</span></h2>
       </div>
     </div>
     <div class="container sl-insc">
       <div class="sl-insc__copy">
         <dl class="sl-insc__facts" data-sl-reveal>
-          <div><dt>Épreuve</dt><dd data-sl-date>Date à venir</dd></div>
+          <div><dt>Épreuve</dt><dd data-sl-date>Vendredi 20 novembre 2026</dd></div>
           <div><dt>Clôture des inscriptions</dt><dd data-sl-cloture>À venir</dd></div>
           <div><dt>Inscription</dt><dd>Individuelle, vagues tirées au sort le jour&nbsp;J</dd></div>
         </dl>
@@ -320,7 +370,7 @@
 
         <div class="sl-done" data-sl-done tabindex="-1" hidden>
           <p class="sl-k">Inscription confirmée</p>
-          <p class="sl-done__title">C’est noté<span class="sl-grad" data-done-name></span>.</p>
+          <p class="sl-done__title">C’est noté<span class="sl-grad" data-done-name></span></p>
           <p class="sl-done__text">La date et l’horaire de votre vague vous seront communiqués par e-mail. D’ici là, on vous attend à l’entraînement.</p>
           <dl class="sl-done__recap" data-done-recap></dl>
           <button class="btn btn--ghost" type="button" data-sl-again><span data-roll>Inscrire une autre personne</span></button>
@@ -328,7 +378,7 @@
 
         <div class="sl-done" data-sl-closed hidden>
           <p class="sl-k">SuperLeague</p>
-          <p class="sl-done__title" data-closed-title>Inscriptions clôturées.</p>
+          <p class="sl-done__title" data-closed-title>Inscriptions clôturées</p>
           <p class="sl-done__text">Une question&nbsp;? Appelez-nous au <a href="tel:+33764623085">07 64 62 30 85</a> ou écrivez à <a href="mailto:team@zero26coachingclub.com">team@zero26coachingclub.com</a>.</p>
         </div>
       </div>
@@ -408,6 +458,6 @@
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/legal.js?v=20261004" defer></script>
-<script src="assets/js/superleague.js?v=20261030b" defer></script>
+<script src="assets/js/superleague.js?v=20261031" defer></script>
 </body>
 </html>
