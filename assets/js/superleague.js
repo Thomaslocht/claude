@@ -41,6 +41,108 @@
     reveals.forEach(el => el.classList.add('is-in'));
   }
 
+  /* ---------- Haut de page : titre en lettres, étirement au survol, parallaxe ---------- */
+  const hero = $('[data-sl-hero]');
+  const title = hero && $('.sl-hero__title', hero);
+  const FINE = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (title) {
+    const words = $$('[data-sl-split]', title);
+    let n = 0;
+    words.forEach(w => {
+      const text = w.textContent.trim();
+      w.textContent = '';
+      Array.from(text).forEach(c => {
+        const ch = document.createElement('span');
+        const inner = document.createElement('span');
+        ch.className = 'sl-ch';
+        inner.className = 'sl-ch__i';
+        inner.style.setProperty('--i', n++);
+        inner.textContent = c;
+        ch.appendChild(inner);
+        w.appendChild(ch);
+      });
+      w.classList.add('is-split');
+    });
+
+    // Un seul dégradé réparti sur toutes les lettres de « SUPER »
+    const grad = $('.sl-w--grad', title);
+    const layoutGrad = () => {
+      if (!grad) return;
+      grad.style.setProperty('--ww', `${grad.offsetWidth}px`);
+      $$('.sl-ch__i', grad).forEach(el => el.style.setProperty('--lx', `${el.parentNode.offsetLeft}px`));
+    };
+
+    const start = () => {
+      layoutGrad();
+      if (!REDUCE) root.classList.add('sl-intro');
+      title.classList.add('is-ready');
+    };
+    let started = false;
+    const go = () => { if (!started) { started = true; start(); } };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
+    setTimeout(go, 1200);
+    if (grad && 'ResizeObserver' in window) new ResizeObserver(layoutGrad).observe(grad);
+    else window.addEventListener('resize', layoutGrad);
+
+    // Les lettres proches du pointeur s'étirent, comme une affiche qu'on tire
+    const letters = $$('.sl-ch', title);
+    if (FINE && !REDUCE && letters.length) {
+      const cur = letters.map(() => 1);
+      let px = null;
+      let py = null;
+      let raf = 0;
+      const tick = () => {
+        raf = 0;
+        let moving = false;
+        letters.forEach((el, i) => {
+          let target = 1;
+          if (px !== null) {
+            const r = el.parentNode.getBoundingClientRect();
+            const cx = r.left + el.offsetLeft + el.offsetWidth / 2;
+            const dx = Math.abs(px - cx) / (r.height * 1.1);
+            const dy = py < r.top ? r.top - py : py > r.bottom ? py - r.bottom : 0;
+            const f = Math.max(0, 1 - dx) * Math.max(0, 1 - dy / 160);
+            target = 1 + .16 * f * f;
+          }
+          cur[i] += (target - cur[i]) * .12;
+          if (Math.abs(target - cur[i]) > .0005) moving = true; else cur[i] = target;
+          el.style.setProperty('--sy', cur[i].toFixed(4));
+        });
+        if (moving) raf = requestAnimationFrame(tick);
+      };
+      const request = () => { if (!raf) raf = requestAnimationFrame(tick); };
+      title.addEventListener('pointermove', e => { px = e.clientX; py = e.clientY; request(); });
+      title.addEventListener('pointerleave', () => { px = null; request(); });
+    }
+
+    // Au défilement : « SUPER » et « LEAGUE » s'écartent, les photos montent à des vitesses différentes
+    if (!REDUCE && window.gsap && window.ScrollTrigger) {
+      const { gsap, ScrollTrigger } = window;
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.matchMedia().add('(min-width: 601px)', () => {
+        const scrub = { trigger: hero, start: 'top top', end: 'bottom top', scrub: .6 };
+        gsap.to('.sl-w--grad', { xPercent: -9, ease: 'none', scrollTrigger: scrub });
+        gsap.to('.sl-w--league', { xPercent: 7, ease: 'none', scrollTrigger: scrub });
+        gsap.to('.sl-hero__kicker', { yPercent: 40, ease: 'none', scrollTrigger: scrub });
+        gsap.to('.sl-hero__glow', { yPercent: 35, ease: 'none', scrollTrigger: scrub });
+        $$('.sl-reel__card', hero).forEach(card => {
+          const reel = { trigger: '[data-sl-reel]', start: 'top bottom', end: 'bottom top', scrub: .6 };
+          // Décalage centré : chaque photo retrouve sa place quand elle passe au milieu de l'écran
+          const d = Number(card.dataset.speed || -80) / 2;
+          gsap.fromTo(card, { y: -d }, { y: d, ease: 'none', scrollTrigger: reel });
+          gsap.fromTo($('img', card), { scale: 1.2 }, { scale: 1, ease: 'none', scrollTrigger: reel });
+        });
+      });
+      window.addEventListener('load', () => ScrollTrigger.refresh());
+    }
+  }
+
+  // Pastilles SKI / RUN / ROW du haut de page : mènent à l'épreuve, appareil déjà sélectionné
+  $$('[data-station]').forEach(a => a.addEventListener('click', () => {
+    const btn = $(`[data-focus="${a.dataset.station}"]`);
+    if (btn) btn.click();
+  }));
+
   /* ---------- Suivre un appareil ---------- */
   const manches = $('[data-manches]');
   const note = $('[data-focus-note]');

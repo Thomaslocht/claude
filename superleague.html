@@ -22,10 +22,10 @@
   <link rel="icon" href="icon-192.png" type="image/png" sizes="192x192">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-  <link rel="preload" href="assets/fonts/barlow-condensed-900-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css?v=20261030">
-  <link rel="stylesheet" href="assets/css/superleague.css?v=20261030">
+  <link rel="stylesheet" href="assets/css/superleague.css?v=20261030b">
   <script>document.documentElement.classList.add('js', 'hero-ready');</script>
 </head>
 <body class="sl">
@@ -96,31 +96,50 @@
 <main id="contenu">
 
   <!-- ========== HERO ========== -->
-  <section class="sl-hero" id="top" aria-labelledby="sl-title">
+  <section class="sl-hero" id="top" aria-labelledby="sl-title" data-sl-hero>
     <div class="sl-hero__glow" aria-hidden="true"></div>
     <div class="container">
       <div class="sl-hero__top">
-        <p class="eyebrow"><span class="eyebrow__dot"></span>Événement · ZERO26. Coaching Club</p>
+        <nav class="sl-stations" aria-label="Les trois appareils">
+          <a href="#epreuve" data-station="ski">SKI</a>
+          <a href="#epreuve" data-station="run">RUN</a>
+          <a href="#epreuve" data-station="row">ROW</a>
+        </nav>
         <p class="sl-state" data-sl-state><span class="sl-state__dot" aria-hidden="true"></span><span data-sl-state-text>Inscriptions ouvertes</span></p>
       </div>
 
-      <h1 class="sl-hero__title" id="sl-title">
-        <span class="sl-w sl-w--grad" data-sl-reveal>Super</span>
-        <span class="sl-w" data-sl-reveal style="--delay:.08s">League</span>
-        <span class="sl-hero__kicker" data-sl-reveal style="--delay:.16s"><span>Concept2</span> <span>Triathlon</span></span>
+      <h1 class="sl-hero__title" id="sl-title" aria-label="SuperLeague, triathlon">
+        <span class="sl-w sl-w--grad" data-sl-split aria-hidden="true">Super</span>
+        <span class="sl-hero__kicker" aria-hidden="true">Triathlon</span>
+        <span class="sl-w sl-w--league" data-sl-split aria-hidden="true">League</span>
       </h1>
 
-      <div class="sl-hero__foot" data-sl-reveal style="--delay:.24s">
+      <div class="sl-hero__foot" data-sl-reveal>
         <p class="sl-hero__lead">La nouvelle compétition du club&nbsp;: trois manches enchaînées sur <strong>SKI</strong>, <strong>RUN</strong> et <strong>ROW</strong>, des départs par vagues de&nbsp;3 et un classement individuel, hommes et femmes.</p>
+        <div class="sl-hero__cta">
+          <a class="btn btn--grad btn--lg" href="#inscription"><span data-roll>Je m’inscris</span><svg class="i"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn--ghost btn--lg" href="#epreuve"><span data-roll>Voir l’épreuve</span></a>
+        </div>
         <dl class="sl-facts">
           <div><dt>Date</dt><dd data-sl-date>À venir</dd></div>
           <div><dt>Lieu</dt><dd>Au club, 11 rue d’Isle, Saint-Quentin</dd></div>
           <div><dt>Format</dt><dd>Individuel · H / F</dd></div>
         </dl>
-        <div class="sl-hero__cta">
-          <a class="btn btn--grad btn--lg" href="#inscription"><span data-roll>Je m’inscris</span><svg class="i"><use href="#i-arrow"/></svg></a>
-          <a class="btn btn--ghost btn--lg" href="#epreuve"><span data-roll>Voir l’épreuve</span></a>
-        </div>
+      </div>
+
+      <div class="sl-reel" data-sl-reel>
+        <figure class="sl-reel__card" data-speed="-50">
+          <div class="sl-reel__media"><img src="assets/img/superleague-ski-540.webp" srcset="assets/img/superleague-ski-540.webp 540w, assets/img/superleague-ski-900.webp 900w" sizes="(max-width: 600px) 72vw, (max-width: 960px) 33vw, 400px" alt="Un athlète tire sur les poignées du SkiErg, au club" width="900" height="1600" style="--pos: 62% 48%" decoding="async"></div>
+          <figcaption><span class="sl-reel__tag" style="--st: var(--ski)">SKI</span>Tirer, encore.</figcaption>
+        </figure>
+        <figure class="sl-reel__card" data-speed="-140">
+          <div class="sl-reel__media"><img src="assets/img/superleague-club-540.webp" srcset="assets/img/superleague-club-540.webp 540w, assets/img/superleague-club-900.webp 900w" sizes="(max-width: 600px) 72vw, (max-width: 960px) 33vw, 400px" alt="Une séance de rameurs au club ZERO26., coachs et athlètes" width="900" height="1600" style="--pos: 40% 72%" decoding="async"></div>
+          <figcaption><span class="sl-reel__tag" style="--st: var(--run)">Club</span>3 appareils de chaque.</figcaption>
+        </figure>
+        <figure class="sl-reel__card" data-speed="-90">
+          <div class="sl-reel__media"><img src="assets/img/superleague-rameuses-540.webp" srcset="assets/img/superleague-rameuses-540.webp 540w, assets/img/superleague-rameuses-900.webp 900w" sizes="(max-width: 600px) 72vw, (max-width: 960px) 33vw, 400px" alt="Deux athlètes côte à côte sur les rameurs" width="900" height="1600" style="--pos: 55% 58%" decoding="async"></div>
+          <figcaption><span class="sl-reel__tag" style="--st: var(--row)">ROW</span>Côte à côte, chacun son chrono.</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -189,15 +208,10 @@
   <!-- ========== LE DÉROULÉ ========== -->
   <section class="sl-dark sl-deroule" id="deroule" aria-labelledby="deroule-title">
     <div class="container">
-      <div class="sl-deroule__grid">
-        <div class="sl-head">
-          <p class="sl-k" data-sl-reveal>02 — Le déroulé</p>
-          <h2 class="sl-display" id="deroule-title" data-sl-reveal>Par vagues <span class="sl-grad">de&nbsp;3.</span></h2>
-          <p class="sl-head__sub" data-sl-reveal>Les vagues sont tirées au sort le jour&nbsp;J. Vous passez trois fois au départ&nbsp;: une fois par manche.</p>
-        </div>
-        <figure class="sl-photo" data-sl-reveal>
-          <img src="assets/img/superleague-rameur-640.webp" srcset="assets/img/superleague-rameur-640.webp 640w, assets/img/superleague-rameur-1200.webp 1200w" sizes="(max-width: 960px) 100vw, 440px" alt="Un athlète sur un rameur Concept2, encouragé par son coach" width="1200" height="1500" loading="lazy" decoding="async">
-        </figure>
+      <div class="sl-head">
+        <p class="sl-k" data-sl-reveal>02 — Le déroulé</p>
+        <h2 class="sl-display" id="deroule-title" data-sl-reveal>Par vagues <span class="sl-grad">de&nbsp;3.</span></h2>
+        <p class="sl-head__sub" data-sl-reveal>Les vagues sont tirées au sort le jour&nbsp;J. Vous passez trois fois au départ&nbsp;: une fois par manche.</p>
       </div>
 
       <ol class="sl-rules">
@@ -391,7 +405,9 @@
 </a>
 
 <script src="assets/js/consent.js?v=20261007" defer></script>
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/legal.js?v=20261004" defer></script>
-<script src="assets/js/superleague.js?v=20261030" defer></script>
+<script src="assets/js/superleague.js?v=20261030b" defer></script>
 </body>
 </html>

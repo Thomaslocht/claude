@@ -10,7 +10,7 @@ Site statique servi tel quel : la racine du dépôt = le dossier `public_html` d
 
 ## SuperLeague Concept2 Triathlon (`superleague.html`)
 
-- Page de l'événement, en onglet dans la navigation de toutes les pages. Styles `assets/css/superleague.css` (police Barlow Condensed hébergée), script `assets/js/superleague.js` ; elle réutilise `legal.js` pour la navigation.
+- Page de l'événement, en onglet dans la navigation de toutes les pages. Styles `assets/css/superleague.css` (police Anton hébergée, équivalent gratuit de la Druk Condensed), script `assets/js/superleague.js` (titre en lettres qui s'étirent au survol, parallaxe GSAP du haut de page) ; elle réutilise `legal.js` pour la navigation et charge GSAP + ScrollTrigger depuis `assets/vendor/`.
 - Date, clôture et nombre de places : `assets/data/superleague.json` (`date` au format `2026-12-12`, `cloture` au format `2026-12-05T23:59`, `placesMax` à 0 = illimité ; `dateLabel` / `clotureLabel` remplacent le texte affiché si besoin). Vide = « à venir ». Le serveur refuse les inscriptions après la clôture ou une fois complet.
 - Inscriptions (PHP) : `superleague-inscription.php` les enregistre dans `zero26-data/superleague-inscriptions.csv`, à côté de `public_html` (hors du site, la publication ne le touche pas ; repli sur `public_html/.data`, fermé aux visiteurs). Colonnes `prenom,nom,sexe,email,tel,inscrit_le` : c'est le format importé par l'app de gestion du jour J (`prenom`, `nom`, `sexe` obligatoires). Une copie part aussi par e-mail via FormSubmit (`notify` dans `superleague.js`).
 - Page organisateur : `superleague-admin.php` (liste, téléchargement du CSV, suppression). Mot de passe stocké haché dans `includes/superleague.php` (`SL_ADMIN_HASH`) ; jamais le mot de passe en clair dans le dépôt.

@@ -105,19 +105,19 @@ $status = $logged ? sl_status(count($rows)) : null;
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <style>
     @font-face { font-family: 'Inter'; font-weight: 300 700; font-display: swap; src: url('assets/fonts/inter-latin.woff2') format('woff2'); }
-    @font-face { font-family: 'Barlow Condensed'; font-weight: 900; font-display: swap; src: url('assets/fonts/barlow-condensed-900-latin.woff2') format('woff2'); }
+    @font-face { font-family: 'Anton'; font-weight: 100 900; font-display: swap; src: url('assets/fonts/anton-latin.woff2') format('woff2'); }
     :root { --bg: #08070d; --card: #12111a; --line: #2e2b3e; --text: #e4e3ee; --muted: #9693ab; --white: #fff; --accent: #b39dff; --error: #f0918a; --grad: linear-gradient(100deg, #7b3ff2 0%, #5653f1 50%, #2f6bf0 100%); }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--bg); color: var(--text); font: 15px/1.5 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
     .wrap { max-width: 1040px; margin: 0 auto; padding: 40px 16px 64px; }
     .top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 32px; }
     .top img { height: 30px; width: auto; display: block; }
-    h1 { margin: 0 0 8px; font: 900 clamp(48px, 9vw, 96px)/.85 'Barlow Condensed', 'Arial Narrow', sans-serif; text-transform: uppercase; color: var(--white); letter-spacing: .005em; }
+    h1 { margin: 0 0 8px; font: 400 clamp(48px, 9vw, 96px)/.9 'Anton', 'Impact', sans-serif; text-transform: uppercase; color: var(--white); letter-spacing: .005em; }
     h1 span { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .sub { margin: 0 0 32px; color: var(--muted); }
     .stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-bottom: 16px; }
     .stat { padding: 18px 20px; border-radius: 14px; background: var(--card); }
-    .stat b { display: block; font: 900 48px/1 'Barlow Condensed', sans-serif; color: var(--white); }
+    .stat b { display: block; font: 400 48px/1 'Anton', 'Impact', sans-serif; color: var(--white); }
     .stat span { font-size: 13px; color: var(--muted); }
     .meta { margin: 0 0 24px; font-size: 14px; color: var(--muted); }
     .meta strong { color: var(--text); font-weight: 600; }
