@@ -528,6 +528,19 @@ a:focus-visible .roll__c, button:focus-visible .roll__c { transform: translateY(
   transition: transform .6s var(--ease);
 }
 .nav__links a.is-active::after { transform: scaleX(1); transform-origin: left; }
+/* Lien vers la page de l'événement en cours (SuperLeague) : signalé par un point du dégradé */
+.nav__links a.nav__event::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 7px;
+  vertical-align: 3px;
+  border-radius: 50%;
+  background: var(--grad);
+  box-shadow: 0 0 0 3px rgba(123, 63, 242, .18), 0 0 10px rgba(123, 63, 242, .7);
+}
+.nav__links a.nav__event::after { left: 23px; }
 .nav__actions { justify-self: end; display: flex; align-items: center; gap: 8px; }
 .nav__burger {
   position: relative;

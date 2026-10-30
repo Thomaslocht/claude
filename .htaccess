@@ -44,6 +44,9 @@ ErrorDocument 404 /404.html
   # Fichiers du dépôt GitHub (publication automatique) : jamais servis aux visiteurs
   RewriteRule (^|/)\.git(/|$) - [R=404,L]
   RewriteRule \.md$ - [R=404,L]
+  # SuperLeague : code commun et stockage de secours des inscriptions, jamais servis aux visiteurs
+  RewriteRule ^includes(/|$) - [R=404,L]
+  RewriteRule (^|/)\.data(/|$) - [R=404,L]
 </IfModule>
 
 # Compression des fichiers texte
