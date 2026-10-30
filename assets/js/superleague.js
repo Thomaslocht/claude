@@ -351,7 +351,10 @@
     const s = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
       .format(d)
       .replace(/ 1 (?=\D)/, ' 1er ');
-    return s.charAt(0).toUpperCase() + s.slice(1);
+    // Heure précisée (2026-11-20T18:15) : « à 18h15 », comme sur le reste du site
+    const hm = /T(\d{2}):(\d{2})/.exec(iso);
+    const at = hm ? ` à ${Number(hm[1])}h${hm[2] === '00' ? '' : hm[2]}` : '';
+    return s.charAt(0).toUpperCase() + s.slice(1) + at;
   };
 
   const showClosed = reason => {
