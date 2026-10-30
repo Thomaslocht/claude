@@ -25,7 +25,7 @@
   <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css?v=20261030">
-  <link rel="stylesheet" href="assets/css/superleague.css?v=20261031b">
+  <link rel="stylesheet" href="assets/css/superleague.css?v=20261031c">
   <script>
     document.documentElement.classList.add('js', 'hero-ready');
     try { if (localStorage.getItem('z26-theme') === 'day') document.documentElement.dataset.theme = 'day'; } catch (e) {}
@@ -140,6 +140,8 @@
         <span class="sl-line sl-line--2"><span class="sl-line__i"><em class="sl-super">Super</em> League</span></span>
       </h1>
 
+      <div class="sl-hud-strip" data-sl-hud-strip aria-hidden="true"></div>
+
       <div class="sl-hero__foot" data-sl-reveal>
         <p class="sl-hero__lead">La nouvelle compétition du club&nbsp;: trois manches enchaînées sur <strong>SKI</strong>, <strong>RUN</strong> et <strong>ROW</strong>, des départs par vagues de&nbsp;3 et un classement individuel, hommes et femmes.</p>
         <div class="sl-hero__cta">
@@ -246,7 +248,7 @@
       <ul class="sl-keys" data-sl-reveal>
         <li><b>3</b><span>athlètes par vague, un sur chaque appareil</span></li>
         <li><b>5&nbsp;min</b><span>entre deux départs</span></li>
-        <li><b>M1 → M3</b><span>la manche suivante commence quand tout le monde a fini</span></li>
+        <li><b>M1<span class="sr-only"> à </span><svg class="i" aria-hidden="true"><use href="#i-arrow"/></svg>M3</b><span>la manche suivante commence quand tout le monde a fini</span></li>
       </ul>
 
       <figure class="sl-board" data-sl-board data-sl-reveal>
@@ -459,6 +461,6 @@
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/js/legal.js?v=20261004" defer></script>
-<script src="assets/js/superleague.js?v=20261031" defer></script>
+<script src="assets/js/superleague.js?v=20261031c" defer></script>
 </body>
 </html>

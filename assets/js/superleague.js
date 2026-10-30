@@ -80,10 +80,20 @@
     { st: 'run', name: 'RUN', v: [.92, .56, .7, .9, .66, .6] },
     { st: 'row', name: 'ROW', v: [.84, .88, .84, .58, .72, .76] }
   ];
+  // Sur téléphone, les données ne tiennent pas derrière le titre : elles passent dans un bandeau
+  // de petites cartes sous le titre (qui défile au doigt) ; le fond garde la grille et le chrono.
+  const strip = hero && $('[data-sl-hud-strip]', hero);
+  const MOBILE = window.matchMedia('(max-width: 600px)');
+  const series = {
+    hrPts: Array.from({ length: 48 }, (_, i) => 166 + Math.sin(i / 3) * 5),
+    power: Array.from({ length: 28 }, () => 260 + Math.random() * 110),
+    t0: performance.now()
+  };
   let hudState = null;
-  if (hud) {
+  const buildHud = () => {
+    if (!hud) return;
     const W = window.innerWidth;
-    const small = W < 760;
+    const mobile = MOBILE.matches && !!strip;
     const R = 78;
     const radarPts = v => v.map((x, i) => {
       const a = -Math.PI / 2 + i * Math.PI * 2 / AXES.length;
@@ -102,29 +112,33 @@
     }).join('');
     const bars = Array.from({ length: 28 }, (_, i) => `<rect x="${i * 8}" width="5" rx="1.5" y="60" height="0"/>`).join('');
     const widgets = [
-      { cls: 'sl-hud__chrono', pos: small ? 'right:4%;top:25%' : 'right:2%;top:39%', d: .25, html: '<span data-hud="chrono">0:00,0</span>' },
-      { cls: 'sl-hud__panel', pos: 'left:1.5%;top:17%', d: .7, min: 600, html: `<div class="sl-hud__k"><span>Fréquence cardiaque</span><span>FC</span></div><div class="sl-hud__v"><span data-hud="hr">168</span><small>bpm</small></div><svg width="236" height="58" viewBox="0 0 236 58" style="margin-top:8px"><polyline data-hud="hr-line" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points=""/></svg>` },
-      { cls: 'sl-hud__panel', pos: 'right:1.5%;top:19%', d: 1, min: 760, html: `<div class="sl-hud__k"><span>Profil athlète</span><span data-hud="profile">SKI</span></div><svg width="230" height="200" viewBox="-115 -100 230 200"><g fill="none" style="stroke:rgba(var(--hud),.22)" stroke-width="1"><polygon points="${ring(1)}"/><polygon points="${ring(.66)}"/><polygon points="${ring(.33)}"/></g><g style="stroke:rgba(var(--hud),.18);fill:rgba(var(--hud),.8)" font-size="9.5" font-weight="600" letter-spacing=".04em">${axisLabels}</g><polygon data-hud="radar" points="${radarPts(PROFILES[0].v)}" style="fill:var(--ski);stroke:var(--ski)" fill-opacity=".2" stroke-width="2" stroke-linejoin="round"/></svg>` },
-      { cls: 'sl-hud__panel', pos: 'right:25%;top:8.5%', d: .55, min: 1100, html: `<div class="sl-hud__k"><span>Puissance</span><span>W</span></div><div class="sl-hud__v"><span data-hud="watt">312</span><small>W</small></div><svg width="220" height="60" viewBox="0 0 220 60" style="margin-top:8px"><g data-hud="bars" fill="currentColor" fill-opacity=".55">${bars}</g></svg>` },
-      { cls: '', pos: 'left:2.5%;top:43%', d: .4, min: 960, html: `<div class="sl-hud__k"><span>Allure / 500 m</span></div><div class="sl-hud__v"><span data-hud="pace">1:42,6</span></div><div class="sl-hud__k" style="margin-top:16px"><span>Cadence</span></div><div class="sl-hud__v"><span data-hud="spm">31</span><small>spm</small></div><div class="sl-hud__k" style="margin-top:16px"><span>VO2 max</span></div><div class="sl-hud__v">54<small>ml/kg/min</small></div>` },
-      { cls: 'sl-hud__panel', pos: 'right:1.5%;top:50%', d: .8, min: 1100, html: `<div class="sl-hud__k"><span>Splits · manche 1</span><span>5:43</span></div><svg width="230" height="8" viewBox="0 0 230 8"><rect x="0" width="117" height="8" rx="4" style="fill:var(--ski)"/><rect x="119" width="75" height="8" rx="4" style="fill:var(--run)"/><rect x="196" width="34" height="8" rx="4" style="fill:var(--row)"/></svg><div class="sl-hud__k" style="margin:10px 0 0;justify-content:flex-start;gap:14px"><span>SKI 2:58</span><span>RUN 1:54</span><span>ROW 0:51</span></div>` }
-    ].filter(w => !w.min || W >= w.min);
+      { cls: 'sl-hud__chrono', pos: mobile ? 'right:4%;top:23%' : 'right:2%;top:39%', d: .25, html: '<span data-hud="chrono">0:00,0</span>' },
+      { cls: 'sl-hud__panel', pos: 'left:1.5%;top:17%', d: .7, min: 600, strip: 1, html: `<div class="sl-hud__k"><span>Fréquence cardiaque</span><span>FC</span></div><div class="sl-hud__v"><span data-hud="hr">168</span><small>bpm</small></div><svg width="236" height="58" viewBox="0 0 236 58" style="margin-top:8px"><polyline data-hud="hr-line" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" points=""/></svg>` },
+      { cls: 'sl-hud__panel sl-hud__radar', pos: 'right:1.5%;top:19%', d: 1, min: 760, strip: 4, html: `<div class="sl-hud__k"><span>Profil athlète</span><span data-hud="profile">SKI</span></div><svg width="230" height="200" viewBox="-115 -100 230 200"><g fill="none" style="stroke:rgba(var(--hud),.22)" stroke-width="1"><polygon points="${ring(1)}"/><polygon points="${ring(.66)}"/><polygon points="${ring(.33)}"/></g><g style="stroke:rgba(var(--hud),.18);fill:rgba(var(--hud),.8)" font-size="9.5" font-weight="600" letter-spacing=".04em">${axisLabels}</g><polygon data-hud="radar" points="${radarPts(PROFILES[0].v)}" style="fill:var(--ski);stroke:var(--ski)" fill-opacity=".2" stroke-width="2" stroke-linejoin="round"/></svg>` },
+      { cls: 'sl-hud__panel', pos: 'right:25%;top:8.5%', d: .55, min: 1100, strip: 2, html: `<div class="sl-hud__k"><span>Puissance</span><span>W</span></div><div class="sl-hud__v"><span data-hud="watt">312</span><small>W</small></div><svg width="220" height="60" viewBox="0 0 220 60" style="margin-top:8px"><g data-hud="bars" fill="currentColor" fill-opacity=".55">${bars}</g></svg>` },
+      { cls: '', pos: 'left:2.5%;top:43%', d: .4, min: 960, strip: 3,
+        html: `<div class="sl-hud__k"><span>Allure / 500 m</span></div><div class="sl-hud__v"><span data-hud="pace">1:42,6</span></div><div class="sl-hud__k" style="margin-top:16px"><span>Cadence</span></div><div class="sl-hud__v"><span data-hud="spm">31</span><small>spm</small></div><div class="sl-hud__k" style="margin-top:16px"><span>VO2 max</span></div><div class="sl-hud__v">54<small>ml/kg/min</small></div>`,
+        stripHtml: `<div class="sl-hud__k"><span>Allure / 500 m</span></div><div class="sl-hud__v"><span data-hud="pace">1:42,6</span></div><div class="sl-hud__k" style="margin-top:12px"><span>Cadence</span></div><div class="sl-hud__v"><span data-hud="spm">31</span><small>spm</small></div>` },
+      { cls: 'sl-hud__panel', pos: 'right:1.5%;top:50%', d: .8, min: 1100, strip: 5, html: `<div class="sl-hud__k"><span>Splits · manche 1</span><span>5:43</span></div><svg width="230" height="8" viewBox="0 0 230 8"><rect x="0" width="117" height="8" rx="4" style="fill:var(--ski)"/><rect x="119" width="75" height="8" rx="4" style="fill:var(--run)"/><rect x="196" width="34" height="8" rx="4" style="fill:var(--row)"/></svg><div class="sl-hud__k" style="margin:10px 0 0;justify-content:flex-start;gap:14px;flex-wrap:wrap"><span>SKI 2:58</span><span>RUN 1:54</span><span>ROW 0:51</span></div>` }
+    ];
+    const bg = mobile ? widgets.filter(w => !w.strip) : widgets.filter(w => !w.min || W >= w.min);
+    const inStrip = mobile ? widgets.filter(w => w.strip).sort((x, y) => x.strip - y.strip) : [];
     hud.innerHTML = '<div class="sl-hud__grid"></div>'
-      + widgets.map((w, i) => `<div class="sl-hud__w ${w.cls}" style="${w.pos};--i:${i}" data-depth="${w.d}">${w.html}</div>`).join('')
+      + bg.map((w, i) => `<div class="sl-hud__w ${w.cls}" style="${w.pos};--i:${i}" data-depth="${w.d}">${w.html}</div>`).join('')
       + (FINE ? '<div class="sl-hud__cross"><i></i><i></i><b></b></div>' : '');
-    if (small) hud.classList.add('is-small');
+    hud.classList.toggle('is-small', W < 760);
+    if (strip) strip.innerHTML = inStrip.map((w, i) => `<div class="sl-hud__w sl-hud__panel ${w.cls.replace('sl-hud__panel', '')}" style="--i:${i}" data-depth="0">${w.stripHtml || w.html}</div>`).join('');
 
-    const q = k => $(`[data-hud="${k}"]`, hud);
+    const q = k => $(`[data-hud="${k}"]`, hero);
     hudState = {
       ws: $$('.sl-hud__w', hud).map(el => ({ el, d: Number(el.dataset.depth), x: 0, y: 0 })),
       hr: q('hr'), hrLine: q('hr-line'), radar: q('radar'), profile: q('profile'),
       bars: q('bars') ? $$('rect', q('bars')) : [], watt: q('watt'), pace: q('pace'), spm: q('spm'), chrono: q('chrono'),
       cross: $('.sl-hud__cross', hud),
-      hrPts: Array.from({ length: 48 }, (_, i) => 166 + Math.sin(i / 3) * 5),
-      power: Array.from({ length: 28 }, () => 260 + Math.random() * 110),
-      t0: performance.now(), radarPts
+      hrPts: series.hrPts, power: series.power, t0: series.t0, radarPts
     };
-  }
+  };
+  buildHud();
 
   // Titre : entrée « police qui se serre », puis « SUPER » passe en italique
   if (title) {
@@ -132,7 +146,11 @@
     const go = () => {
       if (started) return;
       started = true;
-      if (!REDUCE) { root.classList.add('sl-intro'); if (hud) hud.classList.add('sl-hud-in'); }
+      if (!REDUCE) {
+        root.classList.add('sl-intro');
+        if (hud) hud.classList.add('sl-hud-in');
+        if (strip) strip.classList.add('sl-hud-in');
+      }
       title.classList.add('is-ready');
     };
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(go);
@@ -146,18 +164,20 @@
     let onScreen = true;
     let raf = 0;
     let frame = 0;
-    const H = hudState;
-    const drawHr = () => {
+    const drawHr = H => {
       if (!H.hrLine) return;
       const n = H.hrPts.length;
       H.hrLine.setAttribute('points', H.hrPts.map((v, i) => `${(i * 236 / (n - 1)).toFixed(1)},${(58 - (v - 150) * 58 / 35).toFixed(1)}`).join(' '));
     };
-    const drawBars = () => H.bars.forEach((r, i) => {
+    const drawBars = H => H.bars.forEach((r, i) => {
       const h = Math.max(4, (H.power[i] - 180) * 60 / 220);
       r.setAttribute('y', (60 - h).toFixed(1));
       r.setAttribute('height', h.toFixed(1));
     });
-    if (H) { drawHr(); drawBars(); }
+    const drawAll = () => { if (hudState) { drawHr(hudState); drawBars(hudState); } };
+    drawAll();
+    // Passage téléphone / ordinateur (rotation de l'écran) : on recompose le fond et le bandeau
+    MOBILE.addEventListener('change', () => { buildHud(); drawAll(); });
 
     const tick = now => {
       raf = 0;
@@ -165,19 +185,20 @@
       frame += 1;
       const rect = hero.getBoundingClientRect();
       const scrolled = Math.max(0, -rect.top);
+      const H = hudState;
       if (H) {
         const t = Math.max(0, (now - H.t0) / 1000);
         if (!REDUCE) {
           if (frame % 4 === 0) {
             H.hrPts.shift();
             H.hrPts.push(168 + Math.sin(t / 1.6) * 6 + Math.sin(t * 3.1) * 2 + (Math.random() - .5) * 3);
-            drawHr();
+            drawHr(H);
           }
           if (frame % 30 === 0 && H.hr) H.hr.textContent = Math.round(H.hrPts[H.hrPts.length - 1]);
           if (frame % 9 === 0 && H.bars.length) {
             H.power.shift();
             H.power.push(250 + Math.random() * 130 + Math.sin(t) * 20);
-            drawBars();
+            drawBars(H);
             if (H.watt) H.watt.textContent = Math.round(H.power[H.power.length - 1]);
           }
           if (frame % 40 === 0) {
@@ -229,10 +250,10 @@
       hero.addEventListener('pointermove', e => {
         px = e.clientX;
         py = e.clientY;
-        if (H && H.cross) H.cross.classList.add('is-on');
+        if (hudState && hudState.cross) hudState.cross.classList.add('is-on');
         request();
       });
-      hero.addEventListener('pointerleave', () => { px = null; py = null; if (H && H.cross) H.cross.classList.remove('is-on'); });
+      hero.addEventListener('pointerleave', () => { px = null; py = null; if (hudState && hudState.cross) hudState.cross.classList.remove('is-on'); });
     }
     request();
   }
