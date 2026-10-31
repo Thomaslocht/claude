@@ -166,7 +166,7 @@
   color: var(--fg);
   overflow-wrap: break-word;
 }
-.sl-grad, .sl-super {
+.sl-grad {
   background-image: var(--g-text);
   -webkit-background-clip: text;
   background-clip: text;
@@ -255,51 +255,63 @@
 .sl-state.is-closed .sl-state__dot { background: var(--fg-3); }
 .sl-state.is-closed .sl-state__dot::after { display: none; }
 
-/* TRIATHLON / SUPER LEAGUE : chaque ligne remplit exactement la largeur du conteneur.
-   « TRIATHLON » mesure 3,74 fois la taille de sa police et « SUPER LEAGUE » 5,10 fois
-   (Anton, approche serrée) : --f vaut 1 % de la largeur, réduit sur les écrans
-   peu hauts pour que les deux lignes restent entières à l'écran. */
-.sl-hero__title {
+/* Logo TRIATHLON SUPERLEAGUE (validé par le club) à la place du titre.
+   Trois calques : le monogramme « SL » et les mots TRIATHLON / LEAGUE prennent la couleur
+   du texte (blanc la nuit, encre le jour) ; « SUPER » garde son dégradé. Le logo occupe toute
+   la largeur, réduit sur les écrans peu hauts pour rester entier à l'écran. */
+.sl-logo {
   container-type: inline-size;
-  --f: min(1cqi, calc((100svh - 250px) / 39.8));
-  margin: clamp(18px, 4vh, 48px) 0 clamp(36px, 5vh, 64px);
-  font-family: var(--cond);
-  font-weight: 400;
-  text-transform: uppercase;
-  color: var(--fg);
+  display: grid;
+  grid-template-columns: 804fr 176fr 739fr;
+  align-items: center;
+  width: min(100%, calc((100svh - 330px) * 1719 / 574));
+  margin: clamp(22px, 5vh, 56px) 0 clamp(36px, 5vh, 64px);
 }
-.sl-line { display: block; line-height: .86; white-space: nowrap; }
-.sl-line--1 { font-size: calc(var(--f) * 26.7); }
-.sl-line--2 { font-size: calc(var(--f) * 19.6); }
-.sl-line__i { display: inline-block; letter-spacing: -.012em; }
-.sl-super {
-  display: inline-block;
-  font-style: normal;
-  padding-right: .05em;
-  background-image: linear-gradient(100deg, transparent 0 40%, rgba(255, 255, 255, .8) 48%, transparent 56% 100%), var(--g-flash);
-  background-size: 320% 100%, 100% 100%;
-  background-position: 120% 0, 0 0;
-  background-repeat: no-repeat;
-  filter: drop-shadow(0 0 .1em var(--glow-super));
-  transform: skewX(-11deg);
-  transform-origin: 0 100%;
+.sl-logo__mark {
+  display: block;
+  aspect-ratio: 804 / 574;
+  background: var(--fg);
+  -webkit-mask: url('../img/superleague-sl.webp') center / contain no-repeat;
+  mask: url('../img/superleague-sl.webp') center / contain no-repeat;
+}
+.sl-logo__sep { justify-self: center; align-self: stretch; width: max(2px, .3cqi); margin-block: 3%; border-radius: 2px; background: var(--fg-3); opacity: .75; }
+.sl-logo__type { position: relative; display: block; aspect-ratio: 739 / 434; }
+.sl-logo__mots {
+  position: absolute;
+  inset: 0;
+  background: var(--fg);
+  -webkit-mask: url('../img/superleague-mots.webp') center / contain no-repeat;
+  mask: url('../img/superleague-mots.webp') center / contain no-repeat;
+}
+.sl-logo__super { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 0 1.2cqi var(--glow-super)); }
+/* Reflet qui balaie « SUPER » */
+.sl-logo__type::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 0 40%, rgba(255, 255, 255, .8) 48%, transparent 56% 100%) 120% 0 / 320% 100% no-repeat;
+  -webkit-mask: url('../img/superleague-super.webp') center / contain no-repeat;
+  mask: url('../img/superleague-super.webp') center / contain no-repeat;
+  pointer-events: none;
 }
 
-/* Entrée : les lettres arrivent espacées et floues, puis la police se serre ;
-   « SUPER » bascule ensuite en italique. Sans le script, le titre s'affiche au bout de 2,5 s. */
-.js .sl-hero__title:not(.is-ready) .sl-line { opacity: 0; animation: sl-show 0s 2.5s forwards; }
+/* Entrée : le « SL » se dévoile en glissant, le trait se dresse, puis les mots et « SUPER » arrivent.
+   Sans le script, le logo s'affiche au bout de 2,5 s. */
+.js .sl-hero__title:not(.is-ready) > * { opacity: 0; animation: sl-show 0s 2.5s forwards; }
 @keyframes sl-show { to { opacity: 1; } }
-.sl-intro .sl-line__i { animation: sl-squeeze 1.5s var(--ease) both; }
-.sl-intro .sl-line--2 .sl-line__i { animation-delay: .14s; }
-@keyframes sl-squeeze {
-  from { letter-spacing: .5em; opacity: 0; filter: blur(14px); }
-  55% { opacity: 1; filter: blur(0); }
-  to { letter-spacing: -.012em; opacity: 1; filter: none; }
+.sl-intro .sl-logo__mark { animation: sl-mark-in 1.2s var(--ease) both; }
+@keyframes sl-mark-in {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); transform: translateX(-6%) skewX(10deg); }
+  to { opacity: 1; clip-path: inset(0 0 0 0); transform: none; }
 }
-.sl-intro .sl-super { animation: sl-italic .9s var(--ease) 1s both, sl-sheen 6.5s var(--ease-io) 2s infinite; }
-@keyframes sl-italic { from { transform: none; } to { transform: skewX(-11deg); } }
-/* Reflet qui balaie « SUPER » toutes les 6,5 s */
-@keyframes sl-sheen { 0% { background-position: 120% 0, 0 0; } 32%, 100% { background-position: -20% 0, 0 0; } }
+.sl-intro .sl-logo__sep { animation: sl-sep-in .9s var(--ease) .35s both; }
+@keyframes sl-sep-in { from { transform: scaleY(0); } to { transform: none; } }
+.sl-intro .sl-logo__mots { animation: sl-mots-in 1s var(--ease) .5s both; }
+@keyframes sl-mots-in { from { opacity: 0; transform: translateY(8%); } to { opacity: 1; transform: none; } }
+.sl-intro .sl-logo__super { animation: sl-super-in 1.1s var(--ease) .62s both; }
+@keyframes sl-super-in { from { opacity: 0; transform: translateX(12%); filter: blur(10px) drop-shadow(0 0 0 transparent); } to { opacity: 1; transform: none; } }
+.sl-intro .sl-logo__type::after { animation: sl-sheen 6.5s var(--ease-io) 2.2s infinite; }
+@keyframes sl-sheen { 0% { background-position: 120% 0; } 32%, 100% { background-position: -20% 0; } }
 .sl-intro .sl-hero__top > * { animation: sl-fade .9s var(--ease) .7s both; }
 @keyframes sl-fade { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
 
@@ -725,10 +737,8 @@
   .sl-theme .i { width: 24px; }
 }
 @media (max-width: 600px) {
-  /* Titre : les deux lignes respirent, et le bloc s'écarte de ce qui l'entoure */
-  .sl-hero__title { --f: 1cqi; margin: 30px 0 24px; }
-  .sl-line { line-height: 1.04; }
-  .sl-line--2 { margin-top: .08em; }
+  /* Logo : un peu d'air au-dessus et au-dessous */
+  .sl-hero__title { margin: 30px 0 26px; }
   .sl-hud-strip {
     display: flex;
     gap: 8px;

@@ -23,9 +23,11 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/img/superleague-sl.webp" as="image">
+  <link rel="preload" href="assets/img/superleague-super.webp" as="image">
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/style.css?v=20261030">
-  <link rel="stylesheet" href="assets/css/superleague.css?v=20261031c">
+  <link rel="stylesheet" href="assets/css/superleague.css?v=20261031d">
   <script>
     document.documentElement.classList.add('js', 'hero-ready');
     try { if (localStorage.getItem('z26-theme') === 'day') document.documentElement.dataset.theme = 'day'; } catch (e) {}
@@ -135,9 +137,14 @@
         <p class="sl-state" data-sl-state><span class="sl-state__dot" aria-hidden="true"></span><span data-sl-state-text>Inscriptions ouvertes</span></p>
       </div>
 
-      <h1 class="sl-hero__title" id="sl-title">
-        <span class="sl-line sl-line--1"><span class="sl-line__i">Triathlon</span></span>
-        <span class="sl-line sl-line--2"><span class="sl-line__i"><em class="sl-super">Super</em> League</span></span>
+      <h1 class="sl-hero__title sl-logo" id="sl-title">
+        <span class="sl-logo__mark" aria-hidden="true"></span>
+        <span class="sl-logo__sep" aria-hidden="true"></span>
+        <span class="sl-logo__type">
+          <span class="sl-logo__mots" aria-hidden="true"></span>
+          <img class="sl-logo__super" src="assets/img/superleague-super.webp" alt="" width="739" height="434" decoding="async">
+          <span class="sr-only">Triathlon SuperLeague</span>
+        </span>
       </h1>
 
       <div class="sl-hud-strip" data-sl-hud-strip aria-hidden="true"></div>
