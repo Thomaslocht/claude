@@ -256,26 +256,27 @@
 .sl-state.is-closed .sl-state__dot::after { display: none; }
 
 /* Logo TRIATHLON SUPERLEAGUE (validé par le club) à la place du titre.
-   Trois calques : le monogramme « SL » et les mots TRIATHLON / LEAGUE prennent la couleur
-   du texte (blanc la nuit, encre le jour) ; « SUPER » garde son dégradé. Le logo occupe toute
-   la largeur, réduit sur les écrans peu hauts pour rester entier à l'écran. */
+   Trois calques : le monogramme « SL », les mots TRIATHLON / LEAGUE et « SUPER » (dégradé).
+   La nuit, « SL » et les mots sont blancs ; le jour, ils passent en contours noirs (version
+   fond clair du club : jamais d'aplat noir). Le logo occupe toute la largeur, réduit sur les
+   écrans peu hauts pour rester entier à l'écran. */
 .sl-logo {
   container-type: inline-size;
   display: grid;
-  grid-template-columns: 804fr 176fr 739fr;
+  grid-template-columns: 897fr 161fr 779fr;
   align-items: center;
-  width: min(100%, calc((100svh - 330px) * 1719 / 574));
+  width: min(100%, calc((100svh - 330px) * 1837 / 647));
   margin: clamp(22px, 5vh, 56px) 0 clamp(36px, 5vh, 64px);
 }
 .sl-logo__mark {
   display: block;
-  aspect-ratio: 804 / 574;
+  aspect-ratio: 897 / 647;
   background: var(--fg);
   -webkit-mask: url('../img/superleague-sl.webp') center / contain no-repeat;
   mask: url('../img/superleague-sl.webp') center / contain no-repeat;
 }
 .sl-logo__sep { justify-self: center; align-self: stretch; width: max(2px, .3cqi); margin-block: 3%; border-radius: 2px; background: var(--fg-3); opacity: .75; }
-.sl-logo__type { position: relative; display: block; aspect-ratio: 739 / 434; }
+.sl-logo__type { position: relative; display: block; aspect-ratio: 779 / 461; translate: 0 2.2%; }
 .sl-logo__mots {
   position: absolute;
   inset: 0;
@@ -284,6 +285,9 @@
   mask: url('../img/superleague-mots.webp') center / contain no-repeat;
 }
 .sl-logo__super { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 0 1.2cqi var(--glow-super)); }
+/* Mode jour : version fond clair, en contours noirs */
+:root[data-theme="day"] .sl-logo__mark { background: url('../img/superleague-sl-jour.webp') center / contain no-repeat; -webkit-mask: none; mask: none; }
+:root[data-theme="day"] .sl-logo__mots { background: url('../img/superleague-mots-jour.webp') center / contain no-repeat; -webkit-mask: none; mask: none; }
 /* Reflet qui balaie « SUPER » */
 .sl-logo__type::after {
   content: "";
