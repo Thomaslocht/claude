@@ -257,9 +257,9 @@
 
 /* Logo TRIATHLON SUPERLEAGUE (validé par le club) à la place du titre.
    Trois calques : le monogramme « SL », les mots TRIATHLON / LEAGUE et « SUPER » (dégradé).
-   La nuit, « SL » et les mots sont blancs ; le jour, ils passent en contours noirs (version
-   fond clair du club : jamais d'aplat noir). Le logo occupe toute la largeur, réduit sur les
-   écrans peu hauts pour rester entier à l'écran. */
+   La nuit, « SL » et les mots sont blancs. Le jour (version fond clair du club), le « SL » est
+   blanc contouré de noir et les mots sont noirs. Le logo occupe toute la largeur, réduit sur
+   les écrans peu hauts pour rester entier à l'écran. */
 .sl-logo {
   container-type: inline-size;
   display: grid;
@@ -285,9 +285,8 @@
   mask: url('../img/superleague-mots.webp') center / contain no-repeat;
 }
 .sl-logo__super { position: absolute; inset: 0; width: 100%; height: 100%; filter: drop-shadow(0 0 1.2cqi var(--glow-super)); }
-/* Mode jour : version fond clair, en contours noirs */
+/* Mode jour : le « SL » de la version fond clair (blanc contouré de noir) */
 :root[data-theme="day"] .sl-logo__mark { background: url('../img/superleague-sl-jour.webp') center / contain no-repeat; -webkit-mask: none; mask: none; }
-:root[data-theme="day"] .sl-logo__mots { background: url('../img/superleague-mots-jour.webp') center / contain no-repeat; -webkit-mask: none; mask: none; }
 /* Reflet qui balaie « SUPER » */
 .sl-logo__type::after {
   content: "";
