@@ -12,9 +12,9 @@
     endpoint: 'superleague-inscription.php',
     // Date de l'épreuve, clôture, places : à modifier dans ce fichier
     settings: 'assets/data/superleague.json',
-    // Copie de chaque inscription envoyée à l'équipe par e-mail (même service que le
+    // Copie de chaque inscription envoyée à l'équipe par e-mail (même envoi que le
     // formulaire de contact). Laissez '' pour ne rien envoyer par e-mail.
-    notify: 'https://formsubmit.co/ajax/team@zero26coachingclub.com',
+    notify: 'envoi-formulaire.php',
     email: 'team@zero26coachingclub.com',
     phone: '07 64 62 30 85'
   };

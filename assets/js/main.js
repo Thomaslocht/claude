@@ -10,11 +10,9 @@
     email: 'team@zero26coachingclub.com',
     phone: '07 64 62 30 85',
     // Les demandes du formulaire de contact arrivent directement dans la boîte ci-dessus,
-    // via FormSubmit (service gratuit, sans compte). À la toute première demande, FormSubmit
-    // envoie un e-mail « Activate Form » à cette adresse : il suffit de cliquer une fois dessus.
-    // Pour changer de service (Formspree, Getform…), remplacez l'URL ; laissez '' pour
-    // simplement ouvrir la messagerie du visiteur avec la demande pré-remplie.
-    formEndpoint: 'https://formsubmit.co/ajax/team@zero26coachingclub.com'
+    // envoyées par le serveur du site (envoi-formulaire.php). Laissez '' pour simplement
+    // ouvrir la messagerie du visiteur avec la demande pré-remplie.
+    formEndpoint: 'envoi-formulaire.php'
   };
 
   const $ = (s, c = document) => c.querySelector(s);
