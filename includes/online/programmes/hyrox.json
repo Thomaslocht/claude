@@ -1,0 +1,237 @@
+{
+  "_aide": "Programme HYROX Online. Mode d’emploi : MODE-EMPLOI.md. « jour » : 1 = date de début du membre, 7 = dernier jour de la semaine. Une séance sans « blocs » est annoncée, avec la mention « détail à venir ». Ne jamais changer l’« id » d’une séance déjà commencée par des membres.",
+  "nom": "HYROX Online — 8 semaines",
+  "structure": [
+    {
+      "titre": "Bloc 1", "semaines": [1, 4],
+      "seances": ["2 × RUN", "2 × FORCE (upper / lower) + METCONs HYROX courts", "1 × intervalles ergomètres"],
+      "tests": ["Avant la semaine 1, au club : test METCON HYROX (il établit votre niveau)", "Semaine 1 : semaine des tests (1 200 m, 3 600 m, 1K SKI et ROW, 1RM)"]
+    },
+    {
+      "titre": "Bloc 2", "semaines": [5, 8],
+      "seances": ["2 × RUN", "2 × HYROX spécifique (formats longs et compromised runs)", "1 × FORCE fullbody + accessoires"],
+      "tests": ["Semaine 5 : test 5 km (il affine votre vitesse critique)", "Semaine 7 : simulation HYROX au club, à la place d’une séance HYROX spécifique"]
+    }
+  ],
+  "variantes": {
+    "run": {
+      "_aide": "Programme RUN seul (offre « PREPA HYROX - PROGRAMME 8 SEMAINES RUN ») : les séances « run » de ce fichier, avec ses propres blocs, thèmes et tests.",
+      "nom": "HYROX Online RUN — 8 semaines",
+      "types": ["run"],
+      "tests": ["run_1200", "run_3600", "run_5000", "run_vc"],
+      "infos": "",
+      "themes": ["Semaine des tests", "", "", "", "Test 5 km cette semaine", "", "", ""],
+      "structure": [
+        { "titre": "Bloc 1", "semaines": [1, 4], "seances": ["2 × RUN par semaine"], "tests": ["Semaine 1 : tests 1 200 m (jour 1) et 3 600 m (jour 5)"] },
+        { "titre": "Bloc 2", "semaines": [5, 8], "seances": ["2 × RUN par semaine"], "tests": ["Semaine 5 : test 5 km (il affine votre vitesse critique)"] }
+      ]
+    }
+  },
+  "infos": "Vous suivez aussi les cours collectifs du club ? Le programme s’articule avec eux : FORCE = cours Force · Erg intervals = cours Endurance · Spé HYROX = cours HYROX ou HYROX Simulation.",
+  "semaines": [
+    {
+      "theme": "Semaine des tests",
+      "seances": [
+        {
+          "id": "s1-run-a", "jour": 1, "type": "run", "titre": "Test 1 200 m + endurance fondamentale",
+          "description": "Avec le test 3 600 m de la semaine, il détermine votre vitesse critique : la base de toutes vos allures de course.",
+          "blocs": [
+            { "titre": "Test 1 200 m", "texte": "Au mieux, sur piste ou parcours plat. Entrez ensuite votre chrono dans « Mes tests »." },
+            { "titre": "Endurance fondamentale", "texte": "Retour au calme en aisance respiratoire" }
+          ]
+        },
+        {
+          "id": "s1-force-lower", "jour": 2, "type": "force", "titre": "LOWER + METCON HYROX",
+          "description": "Test 1RM back squat. Entrez ensuite votre charge dans « Mes tests ».",
+          "blocs": [
+            {
+              "titre": "Warm up", "note": "2 sets",
+              "lignes": [
+                "Hip CAR’s : 5 par côté",
+                "Jefferson curls : 5 reps lentes",
+                "Overhead (OH) plate squats : 5 reps, 4\" de pause en bas du mouvement"
+              ]
+            },
+            {
+              "titre": "Back squats (test 1RM)",
+              "lignes": [
+                { "texte": "10 reps à vide" },
+                { "texte": "5 reps à 50 %", "intensite": { "ref": "back_squat_1rm", "type": "percent", "value": 50 } },
+                { "texte": "3 reps à 75 %", "intensite": { "ref": "back_squat_1rm", "type": "percent", "value": 75 } },
+                { "texte": "1 rep à 90 %", "intensite": { "ref": "back_squat_1rm", "type": "percent", "value": 90 } },
+                { "texte": "Puis 3 essais au maximum pour le 1RM" }
+              ]
+            },
+            {
+              "titre": "Plyo", "note": "4 sets · R = 1'30\"",
+              "lignes": [
+                "3 duo DB squat jumps @8/12,5 > 3 horizontal jumps, intention maximale, au poids du corps"
+              ]
+            },
+            {
+              "titre": "Romanian deadlifts (7/10 cm)", "note": "R = 1'30\"",
+              "lignes": [ "4 × 6 @RER2" ]
+            },
+            {
+              "titre": "HYROX conditioning", "note": "4 rounds, for time",
+              "lignes": [
+                "20 cals EchoBike",
+                "20 m sled push @raceweight",
+                "20 m walking lunges @raceweight"
+              ]
+            },
+            {
+              "titre": "Access. 1 · Sandbag carries > dead hang", "note": "3 sets · R = 1'",
+              "lignes": [ "50 m UBK @poids max > dead hang, max time" ]
+            }
+          ]
+        },
+        {
+          "id": "s1-erg", "jour": 3, "type": "erg", "titre": "Test 1K SKI + 1K ROW",
+          "description": "Commencez par le SkiErg. Programmez l’ergomètre sur la distance, et l’unité de mesure en watts, pour avoir le chrono final et la puissance moyenne. Entrez ensuite vos chronos dans « Mes tests ».",
+          "blocs": [
+            {
+              "titre": "Protocole avant chaque test",
+              "lignes": [ "2' easy", "1' à l’allure cible", "2' easy", "1' à 120 % de l’allure cible", "1' easy", "2' de récupération" ]
+            },
+            { "titre": "Test 1K SkiErg", "texte": "1 000 m au mieux" },
+            { "titre": "Récupération", "texte": "20', passive ou vélo à basse intensité" },
+            { "titre": "Test 1K RowErg", "texte": "Même protocole, puis 1 000 m au mieux" }
+          ]
+        },
+        {
+          "id": "s1-run-b", "jour": 5, "type": "run", "titre": "Test 3 600 m + endurance fondamentale",
+          "description": "Avec le test 1 200 m, il détermine votre vitesse critique.",
+          "blocs": [
+            { "titre": "Test 3 600 m", "texte": "Au mieux, sur piste ou parcours plat. Entrez ensuite votre chrono dans « Mes tests »." },
+            { "titre": "Endurance fondamentale", "texte": "Retour au calme en aisance respiratoire" }
+          ]
+        },
+        {
+          "id": "s1-force-upper", "jour": 6, "type": "force", "titre": "UPPER + METCON HYROX",
+          "description": "Test 1RM strict press. Entrez ensuite votre charge dans « Mes tests ».",
+          "blocs": [
+            {
+              "titre": "Warm up",
+              "lignes": [ "10 Y raises", "10 behind the neck press (à vide)", "10 scapular push ups" ]
+            },
+            {
+              "titre": "Strict press (test 1RM)",
+              "lignes": [
+                { "texte": "10 reps à vide" },
+                { "texte": "5 reps à 50 %", "intensite": { "ref": "strict_press_1rm", "type": "percent", "value": 50 } },
+                { "texte": "3 reps à 75 %", "intensite": { "ref": "strict_press_1rm", "type": "percent", "value": 75 } },
+                { "texte": "1 rep à 90 %", "intensite": { "ref": "strict_press_1rm", "type": "percent", "value": 90 } },
+                { "texte": "Puis 3 essais au maximum pour le 1RM" }
+              ]
+            },
+            {
+              "titre": "Pull ups",
+              "lignes": [
+                "1 × AMRAP, jusqu’à l’échec (avec élastique si besoin, pour au moins 6 reps)",
+                "Puis 5 sets : AMRAP / 2 reps, départ toutes les 1'30\""
+              ]
+            },
+            {
+              "titre": "HYROX conditioning 1", "note": "3 sets · R = 90\"",
+              "lignes": [
+                { "texte": "5 push presses @60 %", "intensite": { "ref": "strict_press_1rm", "type": "percent", "value": 60 } },
+                "15 wall ball shots @9/12",
+                "30\" wall ball overhead hold"
+              ]
+            },
+            { "titre": "Repos", "texte": "2'" },
+            {
+              "titre": "HYROX conditioning 2", "note": "EMOM 16'",
+              "lignes": [
+                "Minute 1 · X wall ball shots @6/9",
+                "Minute 2 · X cals RowErg"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "theme": "",
+      "seances": [
+        { "id": "s2-run-a", "jour": 1, "type": "run", "titre": "6 × 800 m" },
+        { "id": "s2-force-lower", "jour": 2, "type": "force", "titre": "LOWER + METCON HYROX" },
+        { "id": "s2-erg", "jour": 3, "type": "erg", "titre": "Intervalles ergomètres" },
+        { "id": "s2-run-b", "jour": 5, "type": "run", "titre": "Endurance fondamentale" },
+        { "id": "s2-force-upper", "jour": 6, "type": "force", "titre": "UPPER + METCON HYROX" }
+      ]
+    },
+    {
+      "theme": "",
+      "seances": [
+        { "id": "s3-run-a", "jour": 1, "type": "run", "titre": "3 × 1 200 m + 3 × 800 m" },
+        { "id": "s3-force-lower", "jour": 2, "type": "force", "titre": "LOWER + METCON HYROX" },
+        { "id": "s3-erg", "jour": 3, "type": "erg", "titre": "Intervalles ergomètres" },
+        { "id": "s3-run-b", "jour": 5, "type": "run", "titre": "Endurance fondamentale + tempo" },
+        { "id": "s3-force-upper", "jour": 6, "type": "force", "titre": "UPPER + METCON HYROX" }
+      ]
+    },
+    {
+      "theme": "",
+      "seances": [
+        { "id": "s4-run-a", "jour": 1, "type": "run", "titre": "5 × 1 200 m" },
+        { "id": "s4-force-lower", "jour": 2, "type": "force", "titre": "LOWER + METCON HYROX" },
+        { "id": "s4-erg", "jour": 3, "type": "erg", "titre": "Intervalles ergomètres" },
+        { "id": "s4-run-b", "jour": 5, "type": "run", "titre": "Endurance fondamentale" },
+        { "id": "s4-force-upper", "jour": 6, "type": "force", "titre": "UPPER + METCON HYROX" }
+      ]
+    },
+    {
+      "theme": "Test 5 km cette semaine",
+      "seances": [
+        {
+          "id": "s5-run-a", "jour": 1, "type": "run", "titre": "Test 5 km",
+          "blocs": [
+            { "titre": "Test 5 km", "texte": "Au mieux. Entrez ensuite votre chrono dans « Mes tests »." }
+          ]
+        },
+        { "id": "s5-hyrox-long", "jour": 2, "type": "hyrox", "titre": "HYROX spécifique · format long" },
+        { "id": "s5-force-full", "jour": 4, "type": "force", "titre": "FULLBODY + accessoires" },
+        { "id": "s5-run-b", "jour": 5, "type": "run", "titre": "Endurance fondamentale + tempo" },
+        { "id": "s5-hyrox-compromised", "jour": 6, "type": "hyrox", "titre": "HYROX spécifique · compromised runs" }
+      ]
+    },
+    {
+      "theme": "",
+      "seances": [
+        { "id": "s6-run-a", "jour": 1, "type": "run", "titre": "6 à 8 × 1 000 m" },
+        { "id": "s6-hyrox-long", "jour": 2, "type": "hyrox", "titre": "HYROX spécifique · format long" },
+        { "id": "s6-force-full", "jour": 4, "type": "force", "titre": "FULLBODY + accessoires" },
+        { "id": "s6-run-b", "jour": 5, "type": "run", "titre": "Endurance fondamentale" },
+        { "id": "s6-hyrox-compromised", "jour": 6, "type": "hyrox", "titre": "HYROX spécifique · compromised runs" }
+      ]
+    },
+    {
+      "theme": "Simulation HYROX au club cette semaine",
+      "seances": [
+        { "id": "s7-run-a", "jour": 1, "type": "run", "titre": "2 × 6 × 400 m" },
+        {
+          "id": "s7-simulation", "jour": 2, "type": "hyrox", "titre": "Simulation HYROX au club",
+          "description": "Environ 15 jours avant la course, à la place de la séance HYROX spécifique de la semaine : le format de course en entier, avec votre coach, pour valider vos allures.",
+          "blocs": [
+            { "titre": "Simulation", "texte": "Au club, à la date convenue avec votre coach. Entrez ensuite votre chrono dans « Mes tests » (Simulation HYROX)." }
+          ]
+        },
+        { "id": "s7-force-full", "jour": 4, "type": "force", "titre": "FULLBODY + accessoires" },
+        { "id": "s7-run-b", "jour": 5, "type": "run", "titre": "Endurance fondamentale + tempo" },
+        { "id": "s7-hyrox-compromised", "jour": 6, "type": "hyrox", "titre": "HYROX spécifique · compromised runs" }
+      ]
+    },
+    {
+      "theme": "",
+      "seances": [
+        { "id": "s8-run-a", "jour": 1, "type": "run", "titre": "Endurance fondamentale + rappel allure spécifique" },
+        { "id": "s8-hyrox-long", "jour": 2, "type": "hyrox", "titre": "HYROX spécifique · format long" },
+        { "id": "s8-force-full", "jour": 4, "type": "force", "titre": "FULLBODY + accessoires" },
+        { "id": "s8-run-b", "jour": 5, "type": "run", "titre": "Shakeout run" },
+        { "id": "s8-hyrox-compromised", "jour": 6, "type": "hyrox", "titre": "HYROX spécifique · compromised runs" }
+      ]
+    }
+  ]
+}

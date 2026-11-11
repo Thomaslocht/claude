@@ -1,0 +1,14 @@
+{
+  "_aide": "Tests de référence du calculateur. mesure \"temps\" : chrono sur « distance » (m), allure par « allure » mètres (1000 = /km) ; \"watts\": true pour un ergomètre Concept2 (puissance moyenne calculée depuis le temps). \"chrono\" : temps seul (METCON, simulation). \"charge\" : 1RM en kg (« arrondi » : pas des charges calculées). \"reps\" : répétitions. \"vc\" : vitesse critique calculée à partir des deux tests de « depuis » (jamais saisie) ; les tests de « affiner » (5 km) s'y ajoutent pour les séances qui suivent leur date. « note » s'affiche sous le nom du test. « exemple » sert seulement à l’aperçu du programme. Ne jamais changer l’identifiant d’un test déjà utilisé.",
+
+  "hyrox_metcon": { "nom": "METCON HYROX", "etiquette": "HYROX", "mesure": "chrono", "exemple": "32:00", "note": "Au club, avant la semaine 1 : il établit votre niveau. Format à venir, entre 20 et 40 minutes." },
+  "run_1200": { "nom": "Test 1 200 m", "appareil": "run", "etiquette": "RUN", "mesure": "temps", "distance": 1200, "allure": 1000, "exemple": "4:24", "note": "Semaine 1, jour 1." },
+  "run_3600": { "nom": "Test 3 600 m", "appareil": "run", "etiquette": "RUN", "mesure": "temps", "distance": 3600, "allure": 1000, "exemple": "14:24", "note": "Semaine 1, jour 5." },
+  "run_5000": { "nom": "Test 5 km", "appareil": "run", "etiquette": "RUN", "mesure": "temps", "distance": 5000, "allure": 1000, "exemple": "20:15", "note": "Semaine 5, jour 1. Il affine votre vitesse critique pour la suite du programme." },
+  "run_vc": { "nom": "Vitesse critique", "appareil": "run", "etiquette": "VC", "mesure": "vc", "depuis": ["run_1200", "run_3600"], "affiner": ["run_5000"], "allure": 1000 },
+  "row_1000": { "nom": "1K RowErg", "appareil": "row", "etiquette": "ROW", "mesure": "temps", "watts": true, "distance": 1000, "allure": 500, "exemple": "3:40", "note": "Semaine 1, jour 3." },
+  "ski_1000": { "nom": "1K SkiErg", "appareil": "ski", "etiquette": "SKI", "mesure": "temps", "watts": true, "distance": 1000, "allure": 500, "exemple": "3:58", "note": "Semaine 1, jour 3." },
+  "back_squat_1rm": { "nom": "Back squat 1RM", "etiquette": "1RM", "mesure": "charge", "unite": "kg", "arrondi": 2.5, "exemple": "110", "note": "Semaine 1, jour 2." },
+  "strict_press_1rm": { "nom": "Strict press 1RM", "etiquette": "1RM", "mesure": "charge", "unite": "kg", "arrondi": 2.5, "exemple": "55", "note": "Semaine 1, jour 6." },
+  "hyrox_simulation": { "nom": "Simulation HYROX", "etiquette": "HYROX", "mesure": "chrono", "exemple": "1:24:40", "note": "Au club, environ 15 jours avant la course (semaine 7)." }
+}

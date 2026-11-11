@@ -56,7 +56,7 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && open) { set(false); burger.focus(); }
     });
-    window.matchMedia('(min-width: 1181px)').addEventListener('change', e => { if (e.matches && open) set(false); });
+    window.matchMedia('(min-width: 1161px)').addEventListener('change', e => { if (e.matches && open) set(false); });
   }
 
   // Sommaire : ouvert en permanence sur ordinateur, repliable sur mobile

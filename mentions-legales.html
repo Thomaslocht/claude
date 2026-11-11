@@ -23,7 +23,7 @@
 
   <link rel="preload" href="assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css?v=20261030">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261111">
   <script>document.documentElement.classList.add('js', 'hero-ready');</script>
 </head>
 <body>
@@ -57,11 +57,10 @@
       <a href="index.html#offres" data-roll>Offres</a>
       <a href="index.html#coaching-prive" data-roll>Coaching privé</a>
       <a href="index.html#small-group" data-roll>Small group</a>
-      <a href="index.html#club" data-roll>Le club</a>
       <a href="index.html#tarifs" data-roll>Tarifs</a>
-      <a href="index.html#avis" data-roll>Avis</a>
+      <span class="nav__sep" aria-hidden="true"></span>
       <a class="nav__event" href="superleague.html" data-roll>SuperLeague</a>
-      <a href="index.html#contact" data-roll>Contact</a>
+      <a class="nav__event nav__event--hyrox" href="hyrox-online.html" data-roll>HYROX Online</a>
     </nav>
     <div class="nav__actions">
       <a class="btn btn--ghost nav__member" href="https://backoffice.bsport.io/c/1748/" target="_blank" rel="noopener"><span data-roll>Espace membre</span></a>
@@ -76,11 +75,9 @@
     <a href="index.html#offres" style="--i:0"><span class="menu__num">01</span><span class="menu__txt">Offres</span></a>
     <a href="index.html#coaching-prive" style="--i:1"><span class="menu__num">02</span><span class="menu__txt">Coaching privé</span></a>
     <a href="index.html#small-group" style="--i:2"><span class="menu__num">03</span><span class="menu__txt">Small group</span></a>
-    <a href="index.html#club" style="--i:3"><span class="menu__num">04</span><span class="menu__txt">Le club</span></a>
-    <a href="index.html#tarifs" style="--i:4"><span class="menu__num">05</span><span class="menu__txt">Tarifs</span></a>
-    <a href="superleague.html" style="--i:5"><span class="menu__num">06</span><span class="menu__txt">SuperLeague</span></a>
-    <a href="index.html#faq" style="--i:6"><span class="menu__num">07</span><span class="menu__txt">FAQ</span></a>
-    <a href="index.html#contact" style="--i:7"><span class="menu__num">08</span><span class="menu__txt">Contact</span></a>
+    <a href="index.html#tarifs" style="--i:3"><span class="menu__num">04</span><span class="menu__txt">Tarifs</span></a>
+    <a class="menu__event" href="superleague.html" style="--i:4"><span class="menu__num">05</span><span class="menu__txt">SuperLeague</span></a>
+    <a class="menu__event menu__event--hyrox" href="hyrox-online.html" style="--i:5"><span class="menu__num">06</span><span class="menu__txt">HYROX Online</span></a>
   </nav>
   <div class="menu__foot">
     <div>
@@ -180,6 +177,9 @@
           <h3>Inscriptions aux événements (SuperLeague)</h3>
           <p>Les informations saisies lors d’une inscription à un événement du club (prénom, nom, catégorie, e-mail et téléphone) servent uniquement à l’organiser&nbsp;: répartition des vagues, classements et informations pratiques. Elles sont enregistrées sur le serveur du site, chez notre hébergeur, accessibles à la seule équipe ZERO26, et une copie est envoyée par e-mail à l’équipe depuis ce même serveur. Les prénom, nom et temps des participants peuvent figurer dans les classements affichés le jour de l’épreuve.</p>
           <p>Elles sont conservées jusqu’à la fin de l’événement, puis supprimées au plus tard six mois après.</p>
+          <h3 id="online">Espace HYROX Online</h3>
+          <p>Pour les membres de HYROX Online, l’espace en ligne enregistre votre adresse e-mail, votre prénom, votre téléphone, l’offre achetée, les dates de votre programme, vos résultats de tests et le suivi de vos séances (séance faite, ressenti, commentaire). Ces informations servent uniquement à afficher votre programme avec vos allures et à permettre à votre coach de suivre votre préparation. Elles sont enregistrées sur le serveur du site, chez notre hébergeur, accessibles à vous et à la seule équipe ZERO26. Elles ne sont jamais vendues ni cédées. Lors d’un achat HYROX Online, Bsport transmet au site votre prénom, votre nom, votre e-mail, votre téléphone et le produit acheté&nbsp;: votre espace est créé aussitôt, vous en recevez le lien par e-mail et notre équipe est prévenue pour vous rappeler. Les autres informations de la facture ne sont pas conservées, et les achats sans lien avec HYROX Online sont ignorés. La connexion se fait par un code à usage unique envoyé par e-mail depuis ce même serveur&nbsp;; aucun outil de mesure d’audience ni de publicité n’est chargé dans cet espace.</p>
+          <p>Elles sont supprimées au plus tard un an après la fin de votre accès, ou plus tôt sur simple demande.</p>
           <h3>Réservations et abonnements</h3>
           <p>Les données liées à votre compte, à vos réservations et à vos paiements sont traitées via la plateforme Bsport, dans les conditions décrites à l’<a href="cgv.html#art-23">article 23 des conditions générales de vente</a>.</p>
           <h3>Vos droits</h3>
@@ -193,7 +193,7 @@
           <dl class="idcard">
             <div><dt>Mesure d’audience</dt><dd>Google Analytics 4 (Google Ireland Limited)&nbsp;: pages consultées, durée et provenance des visites, type d’appareil. Cookies <code>_ga</code>, conservés 13&nbsp;mois au maximum. Google Analytics 4 ne conserve pas votre adresse IP.</dd></div>
             <div><dt>Publicité</dt><dd>Pixel Meta (Meta Platforms Ireland Limited)&nbsp;: mesure de l’efficacité de nos publicités sur Facebook et Instagram, et diffusion de publicités adaptées. Cookie <code>_fbp</code>, conservé 3&nbsp;mois au maximum.</dd></div>
-            <div><dt>Indispensable</dt><dd>Mémorisation de votre choix et de l’affichage de la fenêtre «&nbsp;Séance d’essai&nbsp;», dans votre navigateur uniquement. Aucune donnée n’est transmise.</dd></div>
+            <div><dt>Indispensable</dt><dd>Mémorisation de votre choix et de l’affichage de la fenêtre «&nbsp;Séance d’essai&nbsp;», dans votre navigateur uniquement. Aucune donnée n’est transmise. Dans l’espace HYROX Online, un cookie de connexion (<code>z26on</code>) vous garde connecté sur votre appareil, 60&nbsp;jours au plus&nbsp;; il disparaît à la déconnexion.</dd></div>
           </dl>
           <p>Google et Meta peuvent transférer certaines données aux États-Unis&nbsp;; ces transferts sont encadrés par le cadre de protection des données UE – États-Unis (Data Privacy Framework).</p>
           <p>Vous pouvez modifier votre choix à tout moment via le lien «&nbsp;Gérer les cookies&nbsp;», en bas de chaque page. Si vous retirez votre accord, les cookies de mesure déjà déposés sont supprimés.</p>
@@ -243,8 +243,8 @@
         <a href="index.html#philosophie">Philosophie</a>
         <a href="index.html#club">Le club</a>
         <a href="index.html#avis">Avis</a>
-        <a href="index.html#evenements">Événements</a>
         <a href="superleague.html">SuperLeague</a>
+        <a href="hyrox-online.html">HYROX Online</a>
         <a href="index.html#faq">FAQ</a>
       </nav>
       <div>
@@ -280,6 +280,6 @@
 </a>
 
 <script src="assets/js/consent.js?v=20261007" defer></script>
-<script src="assets/js/legal.js?v=20261004" defer></script>
+<script src="assets/js/legal.js?v=20261111" defer></script>
 </body>
 </html>

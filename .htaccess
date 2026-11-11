@@ -33,7 +33,7 @@ ErrorDocument 404 /404.html
   # Ancienne boutique WooCommerce : accueil (en attendant la future page de la collection)
   RewriteRule ^(shop|panier|commander|mon-compte)(/.*)?$ / [R=301,L]
   RewriteRule ^(produit|categorie-produit)/ / [R=301,L]
-  RewriteRule ^(backyardultra|stages)/?$ /#evenements [R=301,NE,L]
+  RewriteRule ^(backyardultra|stages)/?$ / [R=301,L]
   RewriteRule ^(accueil|saison2|cours-1|apprentice-registration-page)/?$ / [R=301,L]
   RewriteRule ^(feed|comments/feed)/?$ / [R=301,L]
   RewriteRule ^([a-z_-]+-)?sitemap(_index)?\.xml$ /sitemap.xml [R=301,L]

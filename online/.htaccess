@@ -1,0 +1,6 @@
+# HYROX/ATHX Online : espace privé, jamais dans les moteurs de recherche
+DirectoryIndex index.php
+
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>

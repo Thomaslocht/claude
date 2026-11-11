@@ -40,7 +40,9 @@ function sl_data_dir(): string
     if ($dir !== null) return $dir;
 
     $site = dirname(__DIR__);
-    foreach ([dirname($site) . '/zero26-data', $site . '/.data'] as $candidate) {
+    // Z26_DATA_DIR : dossier imposé, pour les essais sur un ordinateur (jamais défini sur le serveur)
+    $forced = (string) getenv('Z26_DATA_DIR');
+    foreach ($forced !== '' ? [$forced] : [dirname($site) . '/zero26-data', $site . '/.data'] as $candidate) {
         if (!@is_dir($candidate)) @mkdir($candidate, 0700, true);
         if (@is_dir($candidate) && @is_writable($candidate)) {
             if (str_starts_with($candidate, $site . '/')) sl_protect_dir($candidate);

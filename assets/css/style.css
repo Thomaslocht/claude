@@ -166,7 +166,7 @@ em { font-style: italic; }
 
 /* Mots en italique des titres : dégradé violet → bleu (comme les visuels Instagram du club) */
 .hero__title em,
-:is(.display, .h-lg, .h-md, .footer__claim, .reviews__quote blockquote, .cls__end-title, .backyard__q, .trialpop__title, .values__statement) em:not(:has(.sw)),
+:is(.display, .h-lg, .h-md, .footer__claim, .reviews__quote blockquote, .cls__end-title, .trialpop__title, .values__statement) em:not(:has(.sw)),
 :is(.display, .h-lg, .h-md, .footer__claim, .reviews__quote blockquote) em .sw__i,
 .values__statement em .sw {
   padding: 0 .1em;
@@ -402,52 +402,6 @@ a:focus-visible .roll__c, button:focus-visible .roll__c { transform: translateY(
 .js:not(.hero-ready) :is(.hero__grid, .hero__fx, .hero__scroll, .nav__inner) { animation: hero-failsafe .6s ease 3s forwards; }
 @keyframes hero-failsafe { to { opacity: 1; } }
 
-.cursor, .cursor-dot { position: fixed; left: 0; top: 0; z-index: 520; pointer-events: none; opacity: 0; transition: opacity .3s; }
-.cursor-on .cursor, .cursor-on .cursor-dot { opacity: 1; }
-.cursor__ring {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  margin: -20px 0 0 -20px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .4);
-  transition: width .5s var(--ease), height .5s var(--ease), margin .5s var(--ease), background-color .4s, box-shadow .4s, opacity .3s, transform .3s var(--ease);
-}
-.cursor__label {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: -.01em;
-  color: #000;
-  white-space: nowrap;
-  opacity: 0;
-  transform: scale(.5);
-  transition: opacity .3s, transform .5s var(--ease);
-}
-.cursor-dot::before {
-  content: "";
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  margin: -3px 0 0 -3px;
-  border-radius: 50%;
-  background: var(--white);
-  transition: transform .35s var(--ease), opacity .3s;
-}
-.cur-link .cursor__ring { width: 62px; height: 62px; margin: -31px 0 0 -31px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .75); }
-.cur-link .cursor-dot::before { transform: scale(0); }
-.cur-label .cursor__ring { width: 96px; height: 96px; margin: -48px 0 0 -48px; background: var(--white); box-shadow: none; }
-.cur-label .cursor__label { opacity: 1; transform: none; }
-.cur-label .cursor-dot::before { transform: scale(0); }
-.cur-hide .cursor__ring, .cur-hide .cursor-dot::before,
-.cur-text .cursor__ring, .cur-text .cursor-dot::before { opacity: 0; }
-.cur-down .cursor__ring { transform: scale(.82); }
-.has-cursor, .has-cursor * { cursor: none !important; }
-.has-cursor input, .has-cursor textarea { cursor: text !important; }
-.has-cursor select { cursor: pointer !important; }
-@media (hover: none), (pointer: coarse) { .cursor, .cursor-dot { display: none; } }
-
 .grain {
   position: fixed;
   inset: -50%;
@@ -495,7 +449,7 @@ a:focus-visible .roll__c, button:focus-visible .roll__c { transform: translateY(
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
   height: var(--nav-h);
   max-width: calc(var(--maxw) + var(--gutter) * 2);
   margin-inline: auto;
@@ -506,7 +460,7 @@ a:focus-visible .roll__c, button:focus-visible .roll__c { transform: translateY(
 .nav__links { display: flex; align-items: center; gap: 2px; }
 .nav__links a {
   position: relative;
-  padding: 8px 10px;
+  padding: 8px 7px;
   font-size: 14px;
   font-weight: 500;
   letter-spacing: -.007em;
@@ -517,8 +471,8 @@ a:focus-visible .roll__c, button:focus-visible .roll__c { transform: translateY(
 .nav__links a::after {
   content: "";
   position: absolute;
-  left: 10px;
-  right: 10px;
+  left: 7px;
+  right: 7px;
   bottom: 1px;
   height: 2px;
   border-radius: var(--r-sm);
@@ -528,19 +482,22 @@ a:focus-visible .roll__c, button:focus-visible .roll__c { transform: translateY(
   transition: transform .6s var(--ease);
 }
 .nav__links a.is-active::after { transform: scaleX(1); transform-origin: left; }
-/* Lien vers la page de l'événement en cours (SuperLeague) : signalé par un point du dégradé */
+/* Pages à part (SuperLeague, HYROX Online) : séparées des rubriques du club par un filet et signalées par un point */
+.nav__sep { width: 1px; height: 16px; margin: 0 10px; background: var(--slate); }
 .nav__links a.nav__event::before {
   content: "";
   display: inline-block;
   width: 6px;
   height: 6px;
   margin-right: 7px;
-  vertical-align: 3px;
+  vertical-align: 2px;
   border-radius: 50%;
-  background: var(--grad);
+  background: linear-gradient(100deg, #7b3ff2, #2f6bf0); /* couleurs ZERO26 fixes, même sur les pages qui redéfinissent --grad */
   box-shadow: 0 0 0 3px rgba(123, 63, 242, .18), 0 0 10px rgba(123, 63, 242, .7);
 }
-.nav__links a.nav__event::after { left: 23px; }
+.nav__links a.nav__event--hyrox::before { background: #ffed00; box-shadow: 0 0 0 3px rgba(255, 237, 0, .14), 0 0 10px rgba(255, 237, 0, .55); }
+:root[data-theme="day"] .nav__links a.nav__event--hyrox::before { box-shadow: 0 0 0 1px rgba(0, 0, 0, .55); }
+.nav__links a.nav__event::after { left: 20px; }
 .nav__actions { justify-self: end; display: flex; align-items: center; gap: 8px; }
 .nav__burger {
   position: relative;
@@ -580,26 +537,48 @@ a:focus-visible .roll__c, button:focus-visible .roll__c { transform: translateY(
   transition: clip-path .9s var(--ease-io), visibility 0s .9s;
 }
 .menu.is-open { clip-path: inset(0 0 0 0); visibility: visible; transition: clip-path .9s var(--ease-io), visibility 0s 0s; }
-.menu__links { display: flex; flex-direction: column; }
+.menu__links { display: flex; flex-direction: column; width: 100%; max-width: 560px; }
 .menu__links a {
   display: flex;
-  align-items: baseline;
-  gap: 18px;
-  padding: 8px 0;
+  align-items: center;
+  gap: 16px;
+  padding: 15px 2px;
   border-bottom: 1px solid var(--graphite);
   overflow: hidden;
+  transition: background-color .3s;
 }
-.menu__num { min-width: 24px; font-size: 13px; font-weight: 600; color: var(--accent); }
+.menu__links a:first-child { border-top: 1px solid var(--graphite); }
+.menu__links a[aria-current="page"] .menu__txt { color: var(--white); }
+.menu__links a[aria-current="page"] .menu__num { color: var(--white); }
+.menu__num { min-width: 22px; font-size: 12px; font-weight: 600; color: var(--steel); font-variant-numeric: tabular-nums; }
 .menu__txt {
-  display: inline-block;
-  font-family: var(--serif);
-  font-size: clamp(34px, 8.5vw, 56px);
-  line-height: 1.12;
-  color: var(--white);
-  transform: translateY(105%);
-  transition: transform .9s var(--ease) calc(.22s + var(--i, 0) * .05s);
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  font-family: var(--sans);
+  font-size: clamp(19px, 5.2vw, 24px);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.25;
+  color: var(--bone);
+  transform: translateY(110%);
+  transition: transform .9s var(--ease) calc(.22s + var(--i, 0) * .05s), color .3s;
 }
+.menu__links a:hover .menu__txt { color: var(--white); }
 .menu.is-open .menu__txt { transform: none; }
+/* SuperLeague et HYROX Online : groupe à part, avec le même point que dans la barre du haut */
+.menu__links a:not(.menu__event) + .menu__event { margin-top: 22px; border-top: 1px solid var(--graphite); }
+.menu__event .menu__txt::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: linear-gradient(100deg, #7b3ff2, #2f6bf0);
+  box-shadow: 0 0 0 3px rgba(123, 63, 242, .18), 0 0 10px rgba(123, 63, 242, .7);
+}
+.menu__event--hyrox .menu__txt::before { background: #ffed00; box-shadow: 0 0 0 3px rgba(255, 237, 0, .14), 0 0 10px rgba(255, 237, 0, .55); }
+:root[data-theme="day"] .menu__event--hyrox .menu__txt::before { box-shadow: 0 0 0 1px rgba(0, 0, 0, .55); }
 .menu__foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 20px; font-size: 14px; color: var(--fog); }
 .menu__k { margin-bottom: 6px; font-size: 13px; font-weight: 600; color: var(--steel); }
 .menu__foot a:not(.btn) { color: var(--white); }
@@ -1698,27 +1677,6 @@ html:not(.seg-ready) .seg button[aria-pressed="true"] { background: var(--graphi
 }
 .trial__phone:hover::after { transform: scaleX(1); transform-origin: left; }
 
-/* ---------- 20. Backyard Edition ---------- */
-.backyard { position: relative; border-block: 1px solid var(--graphite); background: radial-gradient(45% 70% at 80% 40%, rgba(123, 63, 242, .14), transparent 70%), radial-gradient(40% 60% at 70% 75%, rgba(47, 107, 240, .1), transparent 70%); }
-.backyard__grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); align-items: center; gap: clamp(40px, 6vw, 96px); }
-.backyard__lead { max-width: 48ch; margin-top: 22px; font-size: 17px; line-height: 1.6; color: var(--fog); }
-.backyard__facts { display: grid; grid-template-columns: repeat(3, auto); justify-content: start; gap: 12px 40px; margin: 32px 0 28px; padding: 20px 0; border-block: 1px solid var(--graphite); }
-.backyard__facts dt { margin-bottom: 6px; font-size: 12.5px; color: var(--steel); }
-.backyard__facts dd { font-size: 15px; font-weight: 500; color: var(--white); }
-.backyard__q { margin-bottom: 22px; font-family: var(--serif); font-size: clamp(28px, 2.8vw, 36px); line-height: 1.15; color: var(--white); }
-.loop { position: relative; width: 100%; max-width: 440px; aspect-ratio: 1; margin-inline: auto; }
-.loop__svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.loop__track { fill: none; stroke: var(--graphite); stroke-width: 2; }
-.loop__prog { fill: none; stroke-width: 2.5; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 200px 200px; }
-.loop__ticks line { stroke: var(--slate); stroke-width: 1; }
-.loop__ticks line.is-major { stroke: var(--steel); }
-.loop__runner { fill: #d9cdff; }
-.loop__runner-halo { fill: rgba(123, 63, 242, .32); }
-.loop__center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-.loop__label { font-size: 12.5px; font-weight: 600; letter-spacing: -.01em; color: var(--fog); }
-.loop__num { margin: 6px 0 10px; font-family: var(--serif); font-size: clamp(72px, 9vw, 120px); line-height: 1; color: var(--white); font-variant-numeric: lining-nums tabular-nums; }
-.loop__km { font-size: 16px; font-weight: 500; color: var(--bone); font-variant-numeric: tabular-nums; }
-.loop__time { margin-top: 6px; font-size: 12.5px; font-weight: 500; letter-spacing: .04em; color: var(--steel); font-variant-numeric: tabular-nums; }
 
 /* ---------- 21. FAQ ---------- */
 .faq__grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(40px, 6vw, 96px); align-items: start; }
@@ -2597,7 +2555,7 @@ html:not(.seg-ready) .seg button[aria-pressed="true"] { background: var(--graphi
 }
 
 /* ---------- 24. Responsive ---------- */
-@media (max-width: 1180px) {
+@media (max-width: 1160px) {
   .nav__links { display: none; }
   .nav__burger { display: inline-block; }
   .nav__inner { grid-template-columns: 1fr auto; }
@@ -2613,7 +2571,7 @@ html:not(.seg-ready) .seg button[aria-pressed="true"] { background: var(--graphi
   .layer--photo { top: auto; right: auto; width: 100%; height: auto; min-height: 0; aspect-ratio: 4 / 3.4; overflow: hidden; border-radius: var(--r-card); }
   .layer--card { left: auto; bottom: auto; width: auto; margin: -84px 14px 0; }
   .layer--badge { position: absolute; top: 14px; right: 14px; bottom: auto; }
-  .method__grid, .ledger__grid, .faq__grid, .contact__grid, .backyard__grid, .club__head { grid-template-columns: 1fr; }
+  .method__grid, .ledger__grid, .faq__grid, .contact__grid, .club__head { grid-template-columns: 1fr; }
   .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(240px, auto); }
   .method__sticky, .faq__intro { position: static; }
   .step { min-height: 0; padding-bottom: 56px; }
@@ -2696,7 +2654,6 @@ html:not(.seg-ready) .seg button[aria-pressed="true"] { background: var(--graphi
   .has-fab .totop { bottom: 76px; }
   .formats { grid-template-columns: 1fr; }
   .format__dots { margin-bottom: 18px; }
-  .backyard__facts { grid-template-columns: 1fr 1fr; }
   .footer__cols { grid-template-columns: 1fr 1fr; gap: 28px 20px; }
   .footer__top { flex-direction: column; align-items: flex-start; }
   .qa__inner p { padding-right: 0; }

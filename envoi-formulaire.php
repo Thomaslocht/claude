@@ -99,7 +99,7 @@ try {
 
     $sent = false;
     try {
-        $sent = mail(
+        $args = [
             FORM_TO,
             mb_encode_mimeheader($subject, 'UTF-8', 'B', "\r\n", 9),
             quoted_printable_encode(str_replace("\n", "\r\n", $body . "\n\n--\nEnvoyé depuis le site zero26coachingclub.com. Pour répondre, utilisez simplement « Répondre ».")),
@@ -109,8 +109,10 @@ try {
                 'MIME-Version' => '1.0',
                 'Content-Type' => 'text/plain; charset=UTF-8',
                 'Content-Transfer-Encoding' => 'quoted-printable',
-            ]
-        );
+            ],
+        ];
+        // Expéditeur technique du domaine (vérifié par le SPF, qui doit inclure Hostinger) ; repli sans
+        $sent = mail(...array_merge($args, ['-f' . FORM_TO])) || mail(...$args);
     } catch (Throwable $e) {
         error_log('Formulaire, envoi : ' . $e->getMessage());
     }

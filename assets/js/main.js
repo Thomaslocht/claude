@@ -151,7 +151,7 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && open) { set(false); burger.focus(); }
     });
-    window.matchMedia('(min-width: 1181px)').addEventListener('change', e => { if (e.matches && open) set(false); });
+    window.matchMedia('(min-width: 1161px)').addEventListener('change', e => { if (e.matches && open) set(false); });
     closeMenu = () => { if (open) set(false); };
   }
 
@@ -1087,55 +1087,6 @@
     };
   })();
 
-  /* ---------- Boucle « Backyard » ---------- */
-  const loop = (() => {
-    const wrap = $('[data-loop]');
-    if (!wrap) return null;
-    const NS = 'http://www.w3.org/2000/svg';
-    const ticks = $('.loop__ticks', wrap);
-    const prog = $('.loop__prog', wrap);
-    const runner = $('.loop__runner', wrap);
-    const halo = $('.loop__runner-halo', wrap);
-    const lapEl = $('[data-loop-lap]', wrap);
-    const kmEl = $('[data-loop-km]', wrap);
-    const timeEl = $('[data-loop-time]', wrap);
-    const R = 170;
-    const C = 2 * Math.PI * R;
-
-    for (let i = 0; i < 60; i++) {
-      const a = i / 60 * Math.PI * 2 - Math.PI / 2;
-      const major = i % 5 === 0;
-      const r1 = R + 14;
-      const r2 = R + (major ? 26 : 20);
-      const l = document.createElementNS(NS, 'line');
-      l.setAttribute('x1', (200 + r1 * Math.cos(a)).toFixed(2));
-      l.setAttribute('y1', (200 + r1 * Math.sin(a)).toFixed(2));
-      l.setAttribute('x2', (200 + r2 * Math.cos(a)).toFixed(2));
-      l.setAttribute('y2', (200 + r2 * Math.sin(a)).toFixed(2));
-      if (major) l.setAttribute('class', 'is-major');
-      ticks.appendChild(l);
-    }
-    prog.style.strokeDasharray = C;
-
-    // v = heures écoulées depuis le départ (0 → 15 boucles ≈ 100 km)
-    const render = v => {
-      const done = v >= 15;
-      const frac = done ? 1 : v - Math.floor(v);
-      prog.style.strokeDashoffset = C * (1 - frac);
-      const a = frac * Math.PI * 2 - Math.PI / 2;
-      const x = 200 + R * Math.cos(a);
-      const y = 200 + R * Math.sin(a);
-      runner.setAttribute('cx', x.toFixed(2)); runner.setAttribute('cy', y.toFixed(2));
-      halo.setAttribute('cx', x.toFixed(2)); halo.setAttribute('cy', y.toFixed(2));
-      lapEl.textContent = pad(Math.min(15, Math.floor(v) + 1));
-      kmEl.textContent = (Math.min(v, 15) * 6.706).toLocaleString('fr-FR', { minimumFractionDigits: 3, maximumFractionDigits: 3 });
-      const s = Math.round(Math.min(v, 15) * 3600);
-      timeEl.textContent = `H+${pad(Math.floor(s / 3600))}:${pad(Math.floor(s % 3600 / 60))}:${pad(s % 60)}`;
-    };
-    render(15);
-    return { render };
-  })();
-
   /* ======================================================================
      Animations (GSAP + ScrollTrigger + Lenis)
      ====================================================================== */
@@ -1169,41 +1120,6 @@
         yTo((e.clientY - r.top - r.height / 2) * k);
       });
       el.addEventListener('pointerleave', () => { xTo(0); yTo(0); });
-    });
-  }
-
-  function setupCursor() {
-    if (!FINE) return;
-    root.classList.add('has-cursor');
-    const ring = $('.cursor');
-    const dot = $('.cursor-dot');
-    const label = $('.cursor__label');
-    const rx = gsap.quickTo(ring, 'x', { duration: .55, ease: 'power3' });
-    const ry = gsap.quickTo(ring, 'y', { duration: .55, ease: 'power3' });
-    const dx = gsap.quickTo(dot, 'x', { duration: .12, ease: 'power3' });
-    const dy = gsap.quickTo(dot, 'y', { duration: .12, ease: 'power3' });
-    let shown = false;
-    window.addEventListener('pointermove', e => {
-      if (e.pointerType && e.pointerType !== 'mouse') return;
-      if (!shown) { gsap.set([ring, dot], { x: e.clientX, y: e.clientY }); shown = true; }
-      root.classList.add('cursor-on');
-      rx(e.clientX); ry(e.clientY); dx(e.clientX); dy(e.clientY);
-    }, { passive: true });
-    document.documentElement.addEventListener('mouseleave', () => root.classList.remove('cursor-on'));
-    window.addEventListener('pointerdown', () => root.classList.add('cur-down'));
-    window.addEventListener('pointerup', () => root.classList.remove('cur-down'));
-    document.addEventListener('pointerover', e => {
-      const t = e.target;
-      if (!(t instanceof Element)) return;
-      const txt = t.closest('input, textarea, select');
-      const lab = t.closest('[data-cursor]');
-      const hide = t.closest('[data-cursor-hide]');
-      const link = t.closest('a, button, label, [role="option"], .pcard__chart');
-      root.classList.toggle('cur-text', !!txt);
-      root.classList.toggle('cur-hide', !!hide && !txt);
-      root.classList.toggle('cur-label', !!lab && !txt && !hide);
-      root.classList.toggle('cur-link', !!link && !lab && !txt && !hide);
-      if (lab) label.textContent = lab.dataset.cursor;
     });
   }
 
@@ -1548,16 +1464,6 @@
       once: true,
       onEnter: b => gsap.to(b, { opacity: 1, x: 0, duration: .9, ease: 'expo.out', stagger: .07, clearProps: 'transform,opacity' })
     });
-
-
-    // Boucle Backyard : tourne uniquement quand elle est visible
-    if (loop) {
-      const st = { v: 0 };
-      const tl = gsap.timeline({ repeat: -1, repeatDelay: 1.6, paused: true });
-      tl.to(st, { v: 15, duration: 36, ease: 'none', onUpdate: () => loop.render(st.v) });
-      loop.render(0);
-      ScrollTrigger.create({ trigger: '[data-loop]', start: 'top bottom', end: 'bottom top', onToggle: s => (s.isActive ? tl.play() : tl.pause()) });
-    }
   }
 
   function setupNav() {
@@ -1624,7 +1530,6 @@
     setupNav();
     setupMarquees();
     setupRings();
-    setupCursor();
     setupMagnetic();
     bindTilt($$('[data-tilt]'));
 
@@ -1663,7 +1568,6 @@
       el.textContent = Number(el.dataset.count).toLocaleString('fr-FR', { minimumFractionDigits: dec, maximumFractionDigits: dec });
     });
     if (chart) chart.still();
-    if (loop) loop.render(15);
     if (trialPop) trialPop.arm();
   }
 

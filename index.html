@@ -25,7 +25,7 @@
   <link rel="preload" href="assets/fonts/playfair-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/playfair-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/style.css?v=20261030">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261111">
   <script>document.documentElement.classList.add('js');</script>
 
   <script type="application/ld+json">
@@ -111,8 +111,6 @@
 <a class="skip" href="#main">Aller au contenu</a>
 
 <!-- ========== CURSEUR & TEXTURE ========== -->
-<div class="cursor" aria-hidden="true"><div class="cursor__ring"><span class="cursor__label"></span></div></div>
-<div class="cursor-dot" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
 <!-- ========== NAVIGATION ========== -->
@@ -125,11 +123,10 @@
       <a href="#offres" data-roll>Offres</a>
       <a href="#coaching-prive" data-roll>Coaching privé</a>
       <a href="#small-group" data-roll>Small group</a>
-      <a href="#club" data-roll>Le club</a>
       <a href="#tarifs" data-roll>Tarifs</a>
-      <a href="#avis" data-roll>Avis</a>
+      <span class="nav__sep" aria-hidden="true"></span>
       <a class="nav__event" href="superleague.html" data-roll>SuperLeague</a>
-      <a href="#contact" data-roll>Contact</a>
+      <a class="nav__event nav__event--hyrox" href="hyrox-online.html" data-roll>HYROX Online</a>
     </nav>
     <div class="nav__actions">
       <a class="btn btn--ghost nav__member" href="https://backoffice.bsport.io/c/1748/" target="_blank" rel="noopener" data-magnetic="0.2"><span data-roll>Espace membre</span></a>
@@ -144,11 +141,9 @@
     <a href="#offres" style="--i:0"><span class="menu__num">01</span><span class="menu__txt">Offres</span></a>
     <a href="#coaching-prive" style="--i:1"><span class="menu__num">02</span><span class="menu__txt">Coaching privé</span></a>
     <a href="#small-group" style="--i:2"><span class="menu__num">03</span><span class="menu__txt">Small group</span></a>
-    <a href="#club" style="--i:3"><span class="menu__num">04</span><span class="menu__txt">Le club</span></a>
-    <a href="#tarifs" style="--i:4"><span class="menu__num">05</span><span class="menu__txt">Tarifs</span></a>
-    <a href="superleague.html" style="--i:5"><span class="menu__num">06</span><span class="menu__txt">SuperLeague</span></a>
-    <a href="#faq" style="--i:6"><span class="menu__num">07</span><span class="menu__txt">FAQ</span></a>
-    <a href="#contact" style="--i:7"><span class="menu__num">08</span><span class="menu__txt">Contact</span></a>
+    <a href="#tarifs" style="--i:3"><span class="menu__num">04</span><span class="menu__txt">Tarifs</span></a>
+    <a class="menu__event" href="superleague.html" style="--i:4"><span class="menu__num">05</span><span class="menu__txt">SuperLeague</span></a>
+    <a class="menu__event menu__event--hyrox" href="hyrox-online.html" style="--i:5"><span class="menu__num">06</span><span class="menu__txt">HYROX Online</span></a>
   </nav>
   <div class="menu__foot">
     <div>
@@ -280,7 +275,7 @@
         </div>
 
         <div class="layer layer--badge" data-depth="0.9">
-          <a class="hero__badge" href="#contact" data-trial="group" data-magnetic="0.4" data-cursor-hide aria-label="Réserver ma séance d’essai offerte en small group">
+          <a class="hero__badge" href="#contact" data-trial="group" data-magnetic="0.4" aria-label="Réserver ma séance d’essai offerte en small group">
             <svg class="hero__badge-ring" viewBox="0 0 120 120" aria-hidden="true">
               <path id="badge-path" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0" fill="none"/>
               <text><textPath href="#badge-path" textLength="286" lengthAdjust="spacing">SÉANCE D’ESSAI OFFERTE · SMALL GROUP · </textPath></text>
@@ -416,7 +411,7 @@
       </header>
 
       <div class="panels">
-        <a class="panel" href="#coaching-prive" data-cursor="Découvrir" data-clip>
+        <a class="panel" href="#coaching-prive" data-clip>
           <div class="panel__media"><img src="assets/img/coaching-kettlebell-800.webp" srcset="assets/img/coaching-kettlebell-800.webp 800w, assets/img/coaching-kettlebell-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 60vw" alt="Un coach ZERO26. accompagne une adhérente lors d’un exercice au kettlebell" width="1600" height="1067" loading="lazy" decoding="async"></div>
           <span class="panel__num">01</span>
           <span class="panel__price">dès 35&nbsp;€ / séance</span>
@@ -430,7 +425,7 @@
           </div>
         </a>
 
-        <a class="panel" href="#small-group" data-cursor="Découvrir" data-clip>
+        <a class="panel" href="#small-group" data-clip>
           <div class="panel__media"><img src="assets/img/small-group-800.webp" srcset="assets/img/small-group-800.webp 800w, assets/img/small-group-1600.webp 1600w" sizes="(max-width: 960px) 100vw, 60vw" alt="Un cours small group dans le club ZERO26." width="1600" height="1066" loading="lazy" decoding="async"></div>
           <span class="panel__num">02</span>
           <span class="panel__price">dès 11&nbsp;€ / séance</span>
@@ -874,7 +869,7 @@
       </div>
 
       <div class="trial__cta">
-        <a class="ring" href="#contact" data-trial="group" data-magnetic="0.25" data-cursor-hide aria-label="Réserver ma séance d’essai offerte en small group">
+        <a class="ring" href="#contact" data-trial="group" data-magnetic="0.25" aria-label="Réserver ma séance d’essai offerte en small group">
           <svg class="ring__text" viewBox="0 0 200 200" aria-hidden="true">
             <path id="ring-path" d="M100 100m-84 0a84 84 0 1 1 168 0a84 84 0 1 1-168 0" fill="none"/>
             <text><textPath href="#ring-path" textLength="524" lengthAdjust="spacing">RÉSERVER MON ESSAI · OFFERT EN SMALL GROUP · </textPath></text>
@@ -885,40 +880,6 @@
           <p class="trial__alt-label">Essai small group <strong>offert</strong> · coaching privé <strong>−50&nbsp;%</strong></p>
           <a class="trial__phone" href="tel:+33764623085" data-magnetic="0.12">07 64 62 30 85</a>
           <a class="link" href="#contact" data-trial="private">Réserver un essai en coaching privé<svg class="i"><use href="#i-arrow"/></svg></a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== BACKYARD EDITION ========== -->
-  <section class="section backyard" id="evenements" aria-labelledby="backyard-title">
-    <div class="container backyard__grid">
-      <div class="backyard__copy">
-        <p class="eyebrow eyebrow--accent" data-reveal>Événement · Backyard Edition</p>
-        <h2 class="h-lg" id="backyard-title" data-split>1 règle. 6,706&nbsp;km <em>toutes les heures.</em></h2>
-        <p class="backyard__lead" data-reveal>Pas de ligne d’arrivée, pas de délai fixe&nbsp;: chaque heure, on repart pour une boucle de 6,7&nbsp;km. Jusqu’à ne plus pouvoir, ou atteindre 100&nbsp;km. Ce n’est pas une question de vitesse, c’est une question de résilience.</p>
-        <dl class="backyard__facts" data-reveal>
-          <div><dt>Départ</dt><dd>Depuis le club</dd></div>
-          <div><dt>Formats</dt><dd>Solo · Duo relais</dd></div>
-          <div><dt>1<sup>re</sup> édition</dt><dd>7 mars 2026</dd></div>
-        </dl>
-        <p class="backyard__q" data-reveal><em>Alors, pouvez-vous continuer&nbsp;?</em></p>
-        <a class="link" href="#contact" data-reveal>Être prévenu de la prochaine édition<svg class="i"><use href="#i-arrow"/></svg></a>
-      </div>
-
-      <div class="loop" data-loop data-reveal>
-        <svg class="loop__svg" viewBox="0 0 400 400" aria-hidden="true">
-          <g class="loop__ticks"></g>
-          <circle class="loop__track" cx="200" cy="200" r="170"/>
-          <circle class="loop__prog" cx="200" cy="200" r="170" stroke="url(#g-ring)"/>
-          <circle class="loop__runner-halo" cx="200" cy="30" r="12"/>
-          <circle class="loop__runner" cx="200" cy="30" r="5"/>
-        </svg>
-        <div class="loop__center">
-          <p class="loop__label">Boucle</p>
-          <p class="loop__num" data-loop-lap>01</p>
-          <p class="loop__km"><span data-loop-km>0,000</span>&nbsp;km</p>
-          <p class="loop__time" data-loop-time>H+00:00:00</p>
         </div>
       </div>
     </div>
@@ -1086,8 +1047,8 @@
         <a href="#philosophie">Philosophie</a>
         <a href="#club">Le club</a>
         <a href="#avis">Avis</a>
-        <a href="#evenements">Événements</a>
         <a href="superleague.html">SuperLeague</a>
+        <a href="hyrox-online.html">HYROX Online</a>
         <a href="#faq">FAQ</a>
       </nav>
       <div>
@@ -1173,6 +1134,6 @@
 <script src="assets/vendor/gsap.min.js" defer></script>
 <script src="assets/vendor/ScrollTrigger.min.js" defer></script>
 <script src="assets/vendor/lenis.min.js" defer></script>
-<script src="assets/js/main.js?v=20261105" defer></script>
+<script src="assets/js/main.js?v=20261111" defer></script>
 </body>
 </html>
