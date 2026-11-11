@@ -472,10 +472,13 @@ on_page_start('Espace coach', $user, 'coach');
           <li>URL&nbsp;: le lien ci-dessous, en entier. Il contient une clé secrète&nbsp;: ne le partagez pas.</li>
           <li>«&nbsp;Valider&nbsp;», puis «&nbsp;Tester&nbsp;»&nbsp;: le dernier appel reçu s’affiche ici (rechargez la page).</li>
         </ol>
+        <?php if (on_is_local()): ?><p class="on-note on-note--warn">Copie d’essai sur ordinateur&nbsp;: ce lien ne vaut pas pour le site en ligne. Copiez celui de zero26coachingclub.com/online/coach.php.</p><?php endif; ?>
         <label class="on-field"><span>Lien du webhook</span><input type="text" value="<?= h(on_webhook_url()) ?>" readonly data-on-select></label>
+        <p class="on-help">Il commence par <b><?= h(ON_SITE) ?>/online/bsport.php/</b> et se termine par 48 caractères (chiffres et lettres de a à f). Si bsport avait déjà un lien en «&nbsp;?cle=&nbsp;», remplacez-le par celui-ci.</p>
       </details>
-      <?php $last = on_webhook_last(); ?>
+      <?php $last = on_webhook_last(); $refus = on_webhook_last_refusal(); ?>
       <p class="on-help">Dernier appel reçu de bsport&nbsp;: <?= $last !== '' ? h($last) : 'aucun pour l’instant' ?>.</p>
+      <?php if ($refus !== '' && substr($refus, 0, 16) >= substr($last, 0, 16)): ?><p class="on-note on-note--warn">Dernier appel refusé&nbsp;: <?= h($refus) ?>.</p><?php endif; ?>
       <p class="on-help">Produits reconnus (nom exact dans la boutique bsport)&nbsp;: <?= h(implode(' · ', array_map(fn($o) => $o['produit'], ON_OFFRES))) ?>.</p>
     </div>
   </section>

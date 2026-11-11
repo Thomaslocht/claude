@@ -453,9 +453,22 @@ function on_webhook_key(): string
     return $key;
 }
 
+// Clé dans le chemin, pas après « ? » : certains services retirent la partie après « ? » des liens de webhook
 function on_webhook_url(): string
 {
-    return ON_SITE . '/online/bsport.php?cle=' . on_webhook_key();
+    return ON_SITE . '/online/bsport.php/' . on_webhook_key();
+}
+
+// Dernier appel refusé (lien sans clé ou mauvaise clé) : raison affichée dans l'espace coach
+function on_webhook_refusal(string $reason): void
+{
+    @file_put_contents(sl_data_dir() . '/bsport-dernier-refus.txt', on_now_str() . ' · ' . $reason, LOCK_EX);
+}
+
+function on_webhook_last_refusal(): string
+{
+    $f = sl_data_dir() . '/bsport-dernier-refus.txt';
+    return is_file($f) ? trim((string) file_get_contents($f)) : '';
 }
 
 // Dernier appel reçu de bsport (sans donnée personnelle), affiché dans l'espace coach

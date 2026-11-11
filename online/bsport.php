@@ -5,7 +5,7 @@
    contient un produit HYROX Online (ON_OFFRES), l'espace du client est créé
    (ou réactivé), il reçoit le lien par e-mail et l'équipe est prévenue.
    Toutes les autres factures sont ignorées, sans rien garder.
-   Lien à coller dans bsport (Réglages → Webhooks) : affiché dans l'espace coach,
+   Lien à coller dans bsport (Réglages → Webhooks) : …/online/bsport.php/<clé>, affiché dans l'espace coach,
    avec la clé secrète créée sur le serveur (jamais dans le dépôt).
    ========================================================================== */
 declare(strict_types=1);
@@ -26,9 +26,15 @@ function bsport_reply(int $status, string $message): never
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') bsport_reply(405, 'POST attendu');
 
 try {
-    $key = (string) ($_GET['cle'] ?? '');
+    // Clé dans le chemin (…/bsport.php/<clé>, forme affichée dans l'espace coach) ou, avant, après « ?cle= »
+    $given = (string) ($_SERVER['PATH_INFO'] ?? '') . ' ' . (is_string($_GET['cle'] ?? null) ? $_GET['cle'] : '');
+    $key = preg_match('/[a-f0-9]{48}/', $given, $found) ? $found[0] : '';
     if ($key === '' || !hash_equals(on_webhook_key(), $key)) {
         if (on_limited('webhook-ip', on_ip(), 30, 3600)) bsport_reply(429, 'trop de tentatives');
+        // Raison gardée pour l'espace coach (début de la clé seulement), pour comparer avec le lien affiché
+        on_webhook_refusal($key === ''
+            ? (trim($given) === '' ? 'aucune clé dans le lien appelé (lien incomplet, ou partie après « ? » retirée)' : 'clé illisible dans le lien appelé')
+            : 'clé incorrecte : le lien appelé commence par …/' . substr($key, 0, 6) . ', celui de l’espace coach par …/' . substr(on_webhook_key(), 0, 6));
         bsport_reply(403, 'clé invalide');
     }
 
